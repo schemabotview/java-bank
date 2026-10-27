@@ -149,6 +149,9 @@ def repl(cwd: Path, env: dict, inputs: list[tuple[str, bool]], argv: list[str]) 
             read(lambda t, m=mark: '\n' in t[m:], 30)
         else:
             read(lambda t, m=mark: '\n' in t[m:] and t.endswith((JSHELL, APP_PROMPT)) if m else t.endswith((JSHELL, APP_PROMPT)), 30)
+            # jshell prints its prompt a moment BEFORE it switches the terminal to read a line; a line
+            # typed in that gap is echoed twice (once by the tty, once by jshell). Seen only under load.
+            read(lambda t: False, 0.3)
         mark = len(text())
         os.write(fd, line.encode() + b'\r')
     read(lambda t: False, 1.0)

@@ -74,8 +74,10 @@ What the replay does that python-expense-tracker's did not:
 - **jshell runs on a dumb terminal**, the only mode whose screen is plain text (under xterm its line
   editor redraws in escape codes and never echoes). It prints no continuation prompt there, so the
   replay puts `   ...> ` back on the lines the session marks as continuations.
-- **A line is typed only after a NEW prompt.** jshell takes seconds to start; typing on silence, or
-  on the previous prompt before the echo arrives, interleaves input with output.
+- **A line is typed only after a NEW prompt, and 0.3s after it.** jshell takes seconds to start; typing on silence, or
+  on the previous prompt before the echo arrives, interleaves input with output; and jshell prints its
+  prompt just before it switches the terminal to read, so a line typed in that gap echoed twice
+  (seen only under load, on 3 of 27 steps).
 - Session prompts: `$ ` command, `jshell> ` snippet, `   ...> ` continuation, `teller> ` the bank's
   own `Scanner` loop (Course 4 on).
 - `volatile` masks digits and identity hashes (`Account@1b6d3586`). `*.class`, `target/` and `out/`
