@@ -121,8 +121,10 @@ not proof.
 - Stylesheets in order: graphl-flow, shell, `./theme.css` last. `--brand` is Java orange `#f89820`.
 - No `file:` installs committed.
 - Narration: `.tts` → `.wav` via Colab + Chatterbox only. Audio at `public/audio/<course>/<id>.wav`.
-  The recording-stage scripts (`film.mjs`, `thumb-film.mjs`, the Colab notebook, the audio manifest)
-  are ported from python-expense-tracker when the first course is narrated.
+  `scripts/audio-manifest.json` (`npm run gen:audio`, 83 sections) and the Colab notebook
+  (`scripts/colab_generate_audio.ipynb`, `REPO = "java-bank"`) are in; regenerate and commit the
+  manifest after any narration edit. `film.mjs` and `thumb-film.mjs` are ported from
+  python-expense-tracker when the audio is in.
 - The app is JDK only. JUnit arrives with Maven in Course 9.
 - `SiteHeader` on the catalog page only.
 - The bank's name is Syndica Bank, never a real bank's.
