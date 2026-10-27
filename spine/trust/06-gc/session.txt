@@ -1,0 +1,10 @@
+$ javac GcLab.java
+$ java -Xmx256m -Xlog:gc:file=gc.log GcLab
+1000000 entries kept, about 171 MB in use
+$ head -4 gc.log
+[0.006s][info][gc] Using G1
+[0.154s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 29M->9M(216M) 9.873ms
+[0.285s][info][gc] GC(1) Pause Young (Normal) (G1 Evacuation Pause) 100M->45M(216M) 35.089ms
+[0.369s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 132M->80M(216M) 42.188ms
+$ grep -c 'Pause Young' gc.log
+6

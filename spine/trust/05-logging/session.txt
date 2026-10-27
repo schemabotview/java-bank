@@ -1,0 +1,12 @@
+$ mvn -q package
+$ java -jar target/ledger-1.0.jar
+a new journal: posting the opening day
+INFO    ledger.audit: posted 2026-10-01,SB-0001,DEPOSIT,1200.00
+INFO    ledger.audit: posted 2026-10-01,SB-0002,DEPOSIT,300.00
+INFO    ledger.audit: posted 2026-10-02,SB-0001,WITHDRAWAL,80.00
+WARNING ledger.audit: declined SB-0002: 500.00 EUR is more than the balance, 300.00 EUR
+INFO    ledger.audit: posted 2026-10-05,SB-0001,DEPOSIT,25.10
+INFO    ledger.audit: posted 2026-10-08,SB-0002,WITHDRAWAL,30.00
+INFO    ledger.audit: posted 2026-10-31,SB-0001,DEPOSIT,17.18
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR

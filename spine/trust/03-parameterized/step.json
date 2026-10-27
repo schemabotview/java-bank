@@ -1,0 +1,1 @@
+{"from": "trust/02-assert-throws", "changes": ["src/test/java/ledger/model/MoneyTest.java"], "volatile": true}

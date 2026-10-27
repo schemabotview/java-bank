@@ -7,6 +7,7 @@ import { collect } from './collect'
 import { stream } from './stream'
 import { save } from './save'
 import { build } from './build'
+import { trust } from './trust'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of COURSE-PLAN.md; a course is
@@ -21,6 +22,7 @@ export const COURSES: Record<string, Course> = {
   [stream.id]: stream,
   [save.id]: save,
   [build.id]: build,
+  [trust.id]: trust,
 }
 
 export type { Course, Section }

@@ -1,0 +1,7 @@
+$ mvn test | grep -E 'Tests run:|FAIL|expected|BUILD'
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.106 s <<< FAILURE! -- in ledger.model.AccountTest
+[ERROR] ledger.model.AccountTest.depositAddsToTheBalance -- Time elapsed: 0.081 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <125.00 EUR> but was: <125.10 EUR>
+[ERROR]   AccountTest.depositAddsToTheBalance:15 expected: <125.00 EUR> but was: <125.10 EUR>
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] BUILD FAILURE
