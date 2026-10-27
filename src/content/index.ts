@@ -1,9 +1,11 @@
+import { intro } from './intro'
 import { start } from './start'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of COURSE-PLAN.md; a course is
 // registered here only once it is authored (scenes, spine, narration), never as scaffolding.
 export const COURSES: Record<string, Course> = {
+  [intro.id]: intro,
   [start.id]: start,
 }
 
