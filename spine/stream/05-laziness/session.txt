@@ -1,0 +1,8 @@
+$ java Bank.java
+built the stream; nothing checked yet
+  checking 2026-09-01 Deposit[amount=1200.00 EUR]
+  checking 2026-09-01 Deposit[amount=300.00 EUR]
+  checking 2026-09-14 Withdrawal[amount=80.00 EUR]
+  checking 2026-10-01 Deposit[amount=2500.00 EUR]
+  checking 2026-10-03 Withdrawal[amount=1500.00 EUR]
+any large withdrawal? true

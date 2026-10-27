@@ -1,0 +1,4 @@
+$ java Bank.java
+2026-09: 3 entries, net 1420.00 EUR
+2026-10: 4 entries, net 944.20 EUR
+{SB-0002=3, SB-0001=4}

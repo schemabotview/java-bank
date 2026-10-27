@@ -1,0 +1,5 @@
+$ java Bank.java
+review: 2026-09-01 SB-0002 Deposit[amount=300.00 EUR]
+review: 2026-10-03 SB-0001 Withdrawal[amount=1500.00 EUR]
+review: 2026-10-05 SB-0002 Withdrawal[amount=120.00 EUR]
+review: 2026-10-09 SB-0002 Deposit[amount=64.20 EUR]

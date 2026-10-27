@@ -30,7 +30,7 @@ audio via Colab.
 | 4 | `decide` | 10 | authored |
 | 5 | `model` | 10 | authored |
 | 6 | `collect` | 8 | authored |
-| 7 | `stream` | 6 | |
+| 7 | `stream` | 6 | authored |
 | 8 | `save` | 6 | |
 | 9 | `build` | 6 | |
 | 10 | `trust` | 6 | |

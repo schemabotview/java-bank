@@ -1,0 +1,4 @@
+$ java Bank.java
+SB-0001 kept: 2120.00 EUR, folded: 2120.00 EUR
+SB-0002 kept: 244.20 EUR, folded: 244.20 EUR
+4 deposits of 7 entries
