@@ -1,0 +1,8 @@
+$ java Bank.java
+Syndica Bank
+Statement for Ana, account SB-0001
+----------------------------
+Balance: 120.50, interest: 1.81
+[Ljava.math.BigDecimal;@55a1c291
+[25.10, -40.00, 12.99]: 3 transactions
+Closing balance: 118.59

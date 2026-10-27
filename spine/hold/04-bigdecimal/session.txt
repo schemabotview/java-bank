@@ -1,0 +1,11 @@
+$ java Bank.java
+Syndica Bank: open, 1 account
+Ana's balance: 120.50
+Interest this month: 1.80750
+In cents: 1.81
+$ jshell -q
+jshell> new BigDecimal(0.1)
+$1 ==> 0.1000000000000000055511151231257827021181583404541015625
+jshell> new BigDecimal("0.1")
+$2 ==> 0.1
+jshell> /exit

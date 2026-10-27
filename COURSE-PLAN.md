@@ -130,15 +130,15 @@ full scene. When in doubt, full scene.
 
 | # | Section | Step | Side pane |
 | --- | --- | --- | --- |
-| 1 | Variables and static types | `int balance`; a `String` into an `int` refused | name → typed slot |
-| 2 | ◆ side pane: primitives vs references | `long` vs `String` | stack slots vs heap objects |
-| 3 | Why money is not a `double` | `0.1 + 0.2`; cents in a `long` | what `0.1` really stores |
+| 1 | Variables and static types | five typed names, one `var`; `int accounts = "one"` refused | type → name → value |
+| 2 | ◆ side pane: primitives vs references | `holder.length()` vs `balance.length()` refused | stack slots vs heap objects |
+| 3 | Why money is not a `double` | `0.1 + 0.2`; cents in a `long`: interest truncates to 180 | why `0.1` is not 0.1 in binary |
 | 4 | `BigDecimal` | `new BigDecimal(0.1)` vs `"0.1"` | unscaled value + scale |
 | 5 | Strings | holder names, account numbers, `formatted` | immutable cells; a "change" is a new object |
-| 6 | `==` vs `equals` | two equal names compare unequal (failure) | two objects, equal text, different identity |
+| 6 | `==` vs `equals` | `"Ana ".strip() == holder` is false (failure) | two objects, equal text, different identity |
 | 7 | Text blocks | a statement header | one literal, its lines |
 | 8 | Arrays | one day's transactions | fixed slots → `BigDecimal`s |
-| 9 | `null` | a helpful NPE message | a slot with no arrow |
+| 9 | `null` | an unassigned field; the helpful NPE names `this.note` | a slot with no arrow; field defaults |
 
 **4. `decide` · Decide, repeat, react · 10**
 

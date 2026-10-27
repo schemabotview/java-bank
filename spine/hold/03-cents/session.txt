@@ -1,0 +1,10 @@
+$ jshell -q
+jshell> 0.1 + 0.2
+$1 ==> 0.30000000000000004
+jshell> 0.1 + 0.2 == 0.3
+$2 ==> false
+jshell> /exit
+$ java Bank.java
+Syndica Bank: open, 1 account
+Ana's balance in cents: 12050
+Interest in cents: 180

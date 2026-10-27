@@ -1,0 +1,7 @@
+$ java Bank.java
+Syndica Bank
+Statement for Ana, account SB-0001
+----------------------------
+Balance: 120.50, interest: 1.81
+Same object? false
+Same text?   true

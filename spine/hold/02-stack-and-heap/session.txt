@@ -1,0 +1,11 @@
+$ jshell -q
+jshell> double balance = 120.50
+jshell> String holder = "Ana"
+jshell> holder.length()
+$3 ==> 3
+jshell> balance.length()
+|  Error:
+|  double cannot be dereferenced
+|  balance.length()
+|  ^------------^
+jshell> /exit

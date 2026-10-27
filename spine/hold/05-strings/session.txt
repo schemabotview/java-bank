@@ -1,0 +1,13 @@
+$ java Bank.java
+Syndica Bank: open
+ANA, account SB-0001
+Balance: 120.50, interest: 1.81
+$ jshell -q
+jshell> String holder = "Ana"
+jshell> holder.toUpperCase()
+$2 ==> "ANA"
+jshell> holder
+holder ==> "Ana"
+jshell> "SB-0001".substring(3)
+$4 ==> "0001"
+jshell> /exit

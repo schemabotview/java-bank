@@ -25,8 +25,8 @@ audio via Colab.
 | # | Course | Sections | Status |
 | --- | --- | --- | --- |
 | 1 | `intro` | 2 | authored; 1.2 gets the finished bank's real output after Course 12 |
-| 2 | `start` | 6 | authored (pilot), awaiting review |
-| 3 | `hold` | 9 | |
+| 2 | `start` | 6 | authored (pilot) |
+| 3 | `hold` | 9 | authored |
 | 4 | `decide` | 10 | |
 | 5 | `model` | 10 | |
 | 6 | `collect` | 8 | |
@@ -36,6 +36,9 @@ audio via Colab.
 | 10 | `trust` | 6 | |
 | 11 | `concurrent` | 9 | |
 | 12 | `ship` | 5 | |
+
+IDE side panes `spread` their blocks down the column (`ide.ts`): a few compact diagrams stacked at
+the top left the lower half empty, and `check` fails a pane under 2/3 filled.
 
 `scripts/look.sh <dir> <slug or scene>…` shoots at 4K and writes 1920×1080 copies for looking at.
 

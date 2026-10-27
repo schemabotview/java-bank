@@ -119,7 +119,9 @@ export function ideFrame({ project = 'ledger', cwd = project, tree, editor, sess
     type: 'code', id: IDE_IDS.terminal, terminal: true, filename: `terminal — ${cwd}`, code: terminal(session),
     fill: true, w: EDITOR_W, minH: TERMINAL_H,
   }
-  const pane: Group = { type: 'group', id: IDE_IDS.side, bare: true, w: SIDE_W, minH: FRAME_H, children: side }
+  // `spread`: the pane's blocks are spaced down the full column, not stacked at its top. A side pane
+  // is a few compact diagrams beside a 23-row editor; stacked, they left the column's lower half empty.
+  const pane: Group = { type: 'group', id: IDE_IDS.side, bare: true, spread: true, w: SIDE_W, minH: FRAME_H, children: side }
   return {
     dir: 'row',
     nodes: [explorer, { type: 'group', id: 'workbench', bare: true, children: [code, term] }, pane],
