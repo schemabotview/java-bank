@@ -3,7 +3,8 @@
 // exactly what renders:
 //
 //   1. A section must be scene-only and narrated, and its scene must exist.
-//   2. Node ids are unique within a scene (graphl-flow resolves edges and focus by id).
+//   2. Node ids are unique within a scene (graphl-flow resolves edges and focus by id), and no table
+//      is empty (one built from a session that was never replayed draws a bare header).
 //   3. An IDE side pane is a DIAGRAM (COURSE-PLAN.md, "The side pane is a diagram"): it holds
 //      an edge, a plot or a table (python-ct's v1 panes were 79 bullet lists and one edge in 90
 //      sections). A bulleted card in a side pane is a caption, so it holds ≤ 3 bullets.
@@ -43,6 +44,12 @@ for (const [id, scene] of Object.entries(SCENES)) {
     if (seen.has(node.id)) problems.push(`scene ${id}  node id '${node.id}' is used twice`)
     seen.add(node.id)
   }
+  // --- 2b. no empty tables ------------------------------------------------------------------------
+  // A table built from a session (rows parsed out of real output) renders as a bare header when the
+  // session has no output — the build-dependencies frame did, after its steps were regenerated and
+  // not replayed, and every render check passed.
+  for (const { node } of all)
+    if (node.type === 'table' && !(node.rows ?? []).length) problems.push(`scene ${id}  table '${node.id}' has no rows — is its session replayed?`)
   if (!isIde(scene)) continue
   const top = new Map(all.map(({ node, top }) => [node.id, top]))
   const side = all.filter(({ top }) => top === 'side').map(({ node }) => node)

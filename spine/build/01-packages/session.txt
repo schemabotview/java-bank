@@ -1,0 +1,10 @@
+$ javac -d out $(find src -name '*.java')
+$ ls out/ledger
+Bank.class
+Page.class
+model
+store
+$ java -cp out ledger.Bank
+a new journal: posting the opening day
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR

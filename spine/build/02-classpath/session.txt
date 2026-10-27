@@ -1,0 +1,9 @@
+$ javac -d out $(find src -name '*.java')
+$ java ledger.Bank
+Error: Could not find or load main class ledger.Bank
+Caused by: java.lang.ClassNotFoundException: ledger.Bank
+$ rm out/ledger/model/Money.class
+$ java -cp out ledger.Bank 2>&1 | grep -v '^	at '
+Exception in thread "main" java.lang.NoClassDefFoundError: ledger/model/Money
+Caused by: java.lang.ClassNotFoundException: ledger.model.Money
+	... 4 more

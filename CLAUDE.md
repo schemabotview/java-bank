@@ -32,7 +32,7 @@ audio via Colab.
 | 6 | `collect` | 8 | authored |
 | 7 | `stream` | 6 | authored |
 | 8 | `save` | 6 | authored |
-| 9 | `build` | 6 | |
+| 9 | `build` | 6 | authored |
 | 10 | `trust` | 6 | |
 | 11 | `concurrent` | 9 | |
 | 12 | `ship` | 5 | |

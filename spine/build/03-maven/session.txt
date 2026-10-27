@@ -1,0 +1,10 @@
+$ mvn -q compile
+$ ls target/classes/ledger
+Bank.class
+Page.class
+model
+store
+$ java -cp target/classes ledger.Bank
+a new journal: posting the opening day
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR

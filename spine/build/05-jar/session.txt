@@ -1,0 +1,13 @@
+$ mvn -q package
+$ ls target/*.jar
+target/ledger-1.0.jar
+$ unzip -p target/ledger-1.0.jar META-INF/MANIFEST.MF
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.5.1
+Java-Version: 25
+Build-Jdk-Spec: 25
+Main-Class: ledger.Bank
+$ java -jar target/ledger-1.0.jar
+a new journal: posting the opening day
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR

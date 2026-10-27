@@ -1,0 +1,12 @@
+$ mvn -q package
+$ jar --describe-module --file target/ledger-1.0.jar
+ledger@1.0 jar:file:///home/ana/ledger/target/ledger-1.0.jar!/module-info.class
+exports ledger.model
+requires java.base mandated
+contains ledger
+contains ledger.store
+main-class ledger.Bank
+$ java -p target/ledger-1.0.jar -m ledger
+a new journal: posting the opening day
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR
