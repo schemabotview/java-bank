@@ -1,0 +1,8 @@
+$ java Bank.java
+a new journal: posting the opening day
+imported 2, rejected 4:
+  row 3: 6 fields, not 5
+  row 4: no account SB-0009
+  row 5: duplicate id T-101
+  row 6: not positive: -15.00
+Ana 1145.10 EUR, Ben 270.00 EUR

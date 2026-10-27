@@ -1,0 +1,12 @@
+$ java Bank.java
+declined: 500.00 EUR is more than the balance, 300.00 EUR
+3 entries posted
+$ cat data/journal.csv
+2026-10-01,SB-0001,DEPOSIT,1200.00
+2026-10-01,SB-0002,DEPOSIT,300.00
+2026-10-02,SB-0001,WITHDRAWAL,80.00
+$ java Bank.java
+declined: 500.00 EUR is more than the balance, 300.00 EUR
+3 entries posted
+$ wc -l data/journal.csv
+6 data/journal.csv

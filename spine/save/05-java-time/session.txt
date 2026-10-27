@@ -1,0 +1,13 @@
+$ java Bank.java
+a new journal: posting the opening day
+imported 2, rejected 4
+interest 2026-10-31: SB-0001 +17.18 EUR
+Ana 1162.28 EUR, Ben 270.00 EUR
+$ jshell -q
+jshell> YearMonth.of(2026, 2).atEndOfMonth()
+$1 ==> 2026-02-28
+jshell> LocalDate.of(2026, 1, 31).plusMonths(1)
+$2 ==> 2026-02-28
+jshell> Instant.parse("2026-10-31T23:30:00Z")
+$3 ==> 2026-10-31T23:30:00Z
+jshell> /exit

@@ -1,0 +1,13 @@
+$ java Bank.java
+a new journal: posting the opening day
+interest 2026-10-31: SB-0001 +17.18 EUR
+paid   2026-10-31T23:30-04:00[America/New_York]
+at     2026-11-01T03:30:00Z
+booked 2026-11-01 (Europe/Berlin)
+Ana 1120.28 EUR, Ben 270.00 EUR
+$ jshell -q
+jshell> var berlin = ZoneId.of("Europe/Berlin")
+jshell> Duration.between(ZonedDateTime.of(2026, 10, 25, 0, 0, 0, 0, berlin),
+   ...>         ZonedDateTime.of(2026, 10, 26, 0, 0, 0, 0, berlin))
+$2 ==> PT25H
+jshell> /exit

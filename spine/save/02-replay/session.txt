@@ -1,0 +1,11 @@
+$ java Bank.java
+a new journal: posting the opening day
+Ana 1120.00 EUR, Ben 300.00 EUR
+$ java Bank.java
+replayed 3 entries from the journal
+Ana 1120.00 EUR, Ben 300.00 EUR
+$ java Bank.java
+replayed 3 entries from the journal
+Ana 1120.00 EUR, Ben 300.00 EUR
+$ wc -l data/journal.csv
+3 data/journal.csv
