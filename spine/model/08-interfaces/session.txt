@@ -1,0 +1,5 @@
+$ java Bank.java
+month 1: Ana +15.00 EUR, Ben +30.00 EUR
+month 2: Ana +15.22 EUR, Ben +30.90 EUR
+month 3: Ana +15.45 EUR, Ben +15.91 EUR
+Ana 1045.67 EUR, Ben 1076.81 EUR

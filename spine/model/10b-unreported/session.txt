@@ -1,0 +1,6 @@
+$ java Bank.java
+Bank.java:11: error: unreported exception InsufficientFundsException; must be caught or declared to be thrown
+        ana.apply(t);
+                 ^
+1 error
+error: compilation failed

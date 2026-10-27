@@ -1,0 +1,12 @@
+$ java Bank.java
+SB-0001 and SB-0002
+same account? false
+distinct amounts: 2
+$ jshell -q
+jshell> class Key { String n; Key(String n) { this.n = n; } }
+jshell> new HashSet<>(List.of(new Key("SB-1"), new Key("SB-1"))).size()
+$2 ==> 2
+jshell> record RKey(String n) {}
+jshell> new HashSet<>(List.of(new RKey("SB-1"), new RKey("SB-1"))).size()
+$4 ==> 1
+jshell> /exit

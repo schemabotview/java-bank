@@ -1,0 +1,9 @@
+$ java Bank.java
+Bank.java:11: error: balance has private access in Account
+    ben.balance = ben.balance.subtract(new BigDecimal("500.00"));
+       ^
+Bank.java:11: error: balance has private access in Account
+    ben.balance = ben.balance.subtract(new BigDecimal("500.00"));
+                     ^
+2 errors
+error: compilation failed

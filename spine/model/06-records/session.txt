@@ -1,0 +1,9 @@
+$ java Bank.java
+Ana: 122.31 EUR
+Ben: 0.00 EUR
+10.00 EUR equals 10.00 EUR? true
+2.50
+Exception in thread "main" java.lang.IllegalArgumentException: finer than cents: 0.001
+	at Money.<init>(Money.java:11)
+	at Money.eur(Money.java:17)
+	at Bank.main(Bank.java:14)

@@ -1,0 +1,10 @@
+$ java Bank.java
+CHECKING: fee 2.00, rate 0
+SAVINGS: fee 0, rate 0.015
+Ana, SAVINGS: monthly interest
+Ben, CHECKING: a debit card
+1
+Exception in thread "main" java.lang.IllegalArgumentException: No enum constant AccountType.PREMIUM
+	at java.base/java.lang.Enum.valueOf(Enum.java:293)
+	at AccountType.valueOf(AccountType.java:4)
+	at Bank.main(Bank.java:18)

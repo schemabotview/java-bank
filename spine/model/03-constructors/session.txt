@@ -1,0 +1,5 @@
+$ java Bank.java
+Ana: 120.50
+Ben: 0
+refused: opening balance below zero: -50.00
+refused: an account needs a holder

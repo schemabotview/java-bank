@@ -1,0 +1,5 @@
+$ java Bank.java
+SB-0001  Ana: 120.50
+SB-0002  Ben: 0
+SB-0003  Chen: 2500.00
+Accounts opened: 3

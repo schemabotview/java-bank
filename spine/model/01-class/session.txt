@@ -1,0 +1,4 @@
+$ java Bank.java
+Ana: 145.60
+Ben: 80.00
+Ben, after a direct write: -420.00

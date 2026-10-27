@@ -1,0 +1,4 @@
+$ java Bank.java
+Deposit[amount=25.10 EUR] -> 145.60 EUR
+Withdrawal[amount=40.00 EUR] -> 105.60 EUR
+Transfer[to=SB-0002, amount=30.00 EUR] -> 75.60 EUR

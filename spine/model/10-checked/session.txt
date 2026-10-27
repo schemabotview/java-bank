@@ -1,0 +1,4 @@
+$ java Bank.java
+done: Withdrawal[amount=40.00 EUR] -> 80.50 EUR
+declined: 500.00 EUR is more than the balance, 80.50 EUR
+done: Deposit[amount=25.10 EUR] -> 105.60 EUR

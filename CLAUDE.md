@@ -28,7 +28,7 @@ audio via Colab.
 | 2 | `start` | 6 | authored (pilot) |
 | 3 | `hold` | 9 | authored |
 | 4 | `decide` | 10 | authored |
-| 5 | `model` | 10 | |
+| 5 | `model` | 10 | authored |
 | 6 | `collect` | 8 | |
 | 7 | `stream` | 6 | |
 | 8 | `save` | 6 | |
