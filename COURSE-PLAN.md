@@ -1,7 +1,7 @@
 # Learn Java by building a bank: full course, beginner to professional — plan
 
 **Status: v1 plan, scope agreed with the owner (2026-10-27): app `ledger`, JDK 25, 12 courses,
-83 sections.** Nothing is authored yet.
+83 sections.** Infra is in (toolchain, spine replay, IDE frame, checks, app map); no course is authored yet.
 
 ## The idea
 
@@ -41,8 +41,8 @@ Each section can also go out as a Short (portrait, `record-reels`).
 
 ## Java: JDK 25 LTS
 
-Pinned to JDK 25 (LTS), installed by `scripts/install-jdk.sh` (also usable as the cloud
-environment's setup script). Every output is run and replayed, never typed; `jshell` plays the part
+Pinned to OpenJDK 25.0.4.1 (LTS; Ubuntu's `openjdk-25-jdk-headless` build) and Maven 3.9.16, both
+installed by `scripts/install-jdk.sh` (also usable as the cloud environment's setup script). Every output is run and replayed, never typed; `jshell` plays the part
 the Python REPL plays. JDK 25 features used: compact source files and instance `main`
 (`void main() { IO.println(...) }`, Course 2 — the class arrives in Course 5 when it is needed),
 module import declarations, flexible constructor bodies (5.3), records, sealed types and
@@ -51,8 +51,8 @@ pattern-matching `switch` (5), virtual threads (11.9). Preview features are not 
 ## The app: `ledger`
 
 One name everywhere: the folder, the Maven `artifactId`, the jar and the root package are `ledger`.
-The bank's name is fictional and provisional (**Fernhollow Bank**), checked against real banks
-before Course 2 is recorded. Customers are Ana, Ben and Chen. Data is synthetic and owned.
+The bank is **Syndica Bank**, a fictional name (the owner's pick, 2026-10-27). Not "Syndicate Bank":
+that was a real Indian bank, now part of Canara Bank, which holds the brand. Customers are Ana, Ben and Chen. Data is synthetic and owned.
 
 The bad rows are real: `12,50` as an amount, an unknown account number, a duplicate transaction id,
 a negative deposit, a timestamp near midnight in New York.
@@ -71,7 +71,7 @@ ledger/
     store/Journal.java append-only CSV journal, replay on start                (8)
     TransferService    thread-safe transfers, lock ordering                    (11)
     api/Server.java    JDK HttpServer: accounts, transfers, idempotency keys   (12)
-  src/test/java/ledger/…           JUnit 5                                     (10)
+  src/test/java/ledger/…           JUnit 6                                     (10)
   pom.xml                          Maven                                       (9)
   data/journal.csv                 what the bank writes                        (8)
   data/import/statement-2026-10.csv  a statement to import, with bad rows      (8)
@@ -91,7 +91,7 @@ ledger/
 | 11 Concurrent | run 10,000 concurrent transfers with no lost cents and no deadlock |
 | 12 Ship | serve an HTTP API where a retried transfer pays once; ship as a jlink runtime |
 
-The app is JDK only. JUnit 5 is the one dependency, arriving with Maven in Course 9, where it also
+The app is JDK only. JUnit (Jupiter 6.1.3) is the one dependency, arriving with Maven in Course 9, where it also
 teaches what a dependency is.
 
 ## The courses
@@ -260,17 +260,18 @@ reads code aloud. A detour ◆ is ≤ 120 s and returns to the bank.
 ## Build order
 
 1. ~~Owner review of the app and scope~~ (2026-10-27: bank, JDK 25, 83 sections).
-2. Infra: port python-expense-tracker's frame template (`ide.ts`), the spine replay (Java steps +
-   jshell sessions), checks and registry; `scripts/install-jdk.sh`; an app-map scene; data files.
+2. ~~Infra~~ (2026-10-27): python-expense-tracker's frame template (`ide.ts`), the spine replay (Java
+   steps + jshell sessions), checks and registry; `scripts/install-jdk.sh`; the app-map scene. The data
+   files are written with the steps that create them (Course 8).
 3. Course 2 as the pilot → owner review.
 4. Courses 1, 3–12 one at a time, each reviewed on its rendered routes, then narrated.
 5. Record all 12 courses → assemble and publish the one video.
 
 ## Decisions
 
-1. App: `ledger`, a small fictional bank (provisional name Fernhollow Bank, to be checked).
-2. JDK 25 LTS; no preview features.
-3. JDK only for the app; JUnit 5 as the one dependency, from Course 9; Maven, not Gradle.
+1. App: `ledger`, a small fictional bank: Syndica Bank.
+2. JDK 25 LTS (25.0.4.1), Maven 3.9.16; no preview features.
+3. JDK only for the app; JUnit 6 (Jupiter) as the one dependency, from Course 9; Maven, not Gradle.
 4. One video, one continuous story: 12 courses, 83 sections, ~2 h 05.
 5. Background is just-in-time (◆ detours), never a front-loaded course.
 6. Repo: `java-bank` (new).

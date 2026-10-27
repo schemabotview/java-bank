@@ -1,0 +1,3 @@
+$ java Bank.java
+Syndica Bank: open
+Ana's balance: 120.5

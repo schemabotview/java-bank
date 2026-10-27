@@ -1,0 +1,6 @@
+/* This repo's whole design surface — the token @graphlearning/shell leaves to the repo. Imported
+   AFTER the shell's stylesheet in main.tsx, so it wins the cascade. Java orange as --brand: 7.6:1
+   on the dark canvas (#1a1d23). A light deck would have to re-pick it (2.1:1 on #f7f8fa). */
+:root {
+  --brand: #f89820;
+}
