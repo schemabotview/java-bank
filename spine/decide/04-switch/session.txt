@@ -1,0 +1,11 @@
+$ java Bank.java
+Ana, checking account
+Monthly fee 2.00, balance 118.50
+$ jshell -q
+jshell> String type = "savings"
+jshell> int fee = switch (type) { case "checking" -> 2; }
+|  Error:
+|  the switch expression does not cover all possible input values
+|  int fee = switch (type) { case "checking" -> 2; };
+|            ^-------------------------------------^
+jshell> /exit

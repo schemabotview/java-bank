@@ -1,0 +1,10 @@
+$ java Bank.java
+Ana's balance: 120.50
+Refused: 200.00 is more than 120.50
+Paid out 40.00, balance 80.50
+$ jshell -q
+jshell> new BigDecimal("2.0").equals(new BigDecimal("2.00"))
+$1 ==> false
+jshell> new BigDecimal("2.0").compareTo(new BigDecimal("2.00"))
+$2 ==> 0
+jshell> /exit

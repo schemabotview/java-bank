@@ -1,0 +1,13 @@
+$ java Bank.java
+Ana's balance: 120.50
+A year of interest: 21.69
+$ jshell -q
+jshell> 12050 + 2510 * 2
+$1 ==> 17070
+jshell> (12050 + 2510) * 2
+$2 ==> 29120
+jshell> 17070 / 100
+$3 ==> 170
+jshell> 17070 % 100
+$4 ==> 70
+jshell> /exit

@@ -1,0 +1,12 @@
+$ java Bank.java
+Syndica Bank: teller ready
+teller> deposit 25.10
+deposited 25.10, balance 145.60
+teller> withdraw 200
+refused: 200 is more than 145.60
+teller> withdraw 40
+paid out 40, balance 105.60
+teller> balance
+balance: 105.60
+teller> quit
+teller closed

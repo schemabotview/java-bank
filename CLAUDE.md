@@ -27,7 +27,7 @@ audio via Colab.
 | 1 | `intro` | 2 | authored; 1.2 gets the finished bank's real output after Course 12 |
 | 2 | `start` | 6 | authored (pilot) |
 | 3 | `hold` | 9 | authored |
-| 4 | `decide` | 10 | |
+| 4 | `decide` | 10 | authored |
 | 5 | `model` | 10 | |
 | 6 | `collect` | 8 | |
 | 7 | `stream` | 6 | |

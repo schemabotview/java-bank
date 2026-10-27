@@ -1,0 +1,10 @@
+$ java Bank.java
+Syndica Bank: teller ready
+teller> deposit 12,50
+not an amount: 12,50
+teller> deposit 12.50
+deposited 12.50, balance 133.00
+teller> fee
+charged 2.00, balance 131.00
+teller> quit
+teller closed
