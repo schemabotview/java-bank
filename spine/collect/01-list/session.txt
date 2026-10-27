@@ -1,0 +1,6 @@
+$ java Bank.java
+declined: 500.00 EUR is more than the balance, 105.60 EUR
+ledger: 3 entries
+first:  Entry[on=2026-10-01, account=SB-0001, tx=Deposit[amount=25.10 EUR]]
+last:   Entry[on=2026-10-03, account=SB-0001, tx=Deposit[amount=12.99 EUR]]
+SB-0001: 118.59 EUR

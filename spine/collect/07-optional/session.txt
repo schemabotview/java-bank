@@ -1,0 +1,8 @@
+$ java Bank.java
+SB-0002: Ben
+SB-0009: no such account
+120.50 EUR
+Optional.empty
+Exception in thread "main" java.util.NoSuchElementException: No value present
+	at java.base/java.util.Optional.orElseThrow(Optional.java:377)
+	at Bank.main(Bank.java:20)

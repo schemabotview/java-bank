@@ -1,0 +1,7 @@
+$ java Bank.java
+Ana's statement: 2 entries
+after the ledger is cleared: 2 entries
+Exception in thread "main" java.lang.UnsupportedOperationException
+	at java.base/java.util.ImmutableCollections.uoe(ImmutableCollections.java:159)
+	at java.base/java.util.ImmutableCollections$AbstractImmutableCollection.add(ImmutableCollections.java:164)
+	at Bank.main(Bank.java:17)

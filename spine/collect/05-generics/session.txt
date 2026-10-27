@@ -1,0 +1,5 @@
+$ java Bank.java
+page 2 of 2
+  2026-10-03 Deposit[amount=12.99 EUR]
+  SB-0003 Chen
+  SB-0002 Ben

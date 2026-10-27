@@ -1,0 +1,7 @@
+$ java Bank.java
+Ben: 99.99 EUR
+flag SB-0002: true
+flag SB-0003: true
+flag SB-0002: false
+2 flagged: [SB-0003, SB-0002]
+SB-0001 flagged? false

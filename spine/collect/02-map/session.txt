@@ -1,0 +1,13 @@
+$ java Bank.java
+Ben: 99.99 EUR
+SB-0009: null
+3 accounts: [SB-0003, SB-0002, SB-0001]
+$ jshell -q
+jshell> for (var k : List.of("SB-0001", "SB-0002", "SB-0003")) {
+   ...>     int h = k.hashCode();
+   ...>     IO.println(k + ": " + h + ", bucket " + ((h ^ (h >>> 16)) & 15));
+   ...> }
+SB-0001: -1714045761, bucket 10
+SB-0002: -1714045760, bucket 5
+SB-0003: -1714045759, bucket 4
+jshell> /exit

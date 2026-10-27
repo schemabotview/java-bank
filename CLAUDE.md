@@ -29,7 +29,7 @@ audio via Colab.
 | 3 | `hold` | 9 | authored |
 | 4 | `decide` | 10 | authored |
 | 5 | `model` | 10 | authored |
-| 6 | `collect` | 8 | |
+| 6 | `collect` | 8 | authored |
 | 7 | `stream` | 6 | |
 | 8 | `save` | 6 | |
 | 9 | `build` | 6 | |

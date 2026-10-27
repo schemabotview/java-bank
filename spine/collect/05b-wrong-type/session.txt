@@ -1,0 +1,8 @@
+$ java Bank.java
+Bank.java:19: error: incompatible types: inference variable T has incompatible equality constraints Account,Entry
+    Page<Account> list = Page.of(ledger, 2, 1);
+                                ^
+  where T is a type-variable:
+    T extends Object declared in method <T>of(List<T>,int,int)
+1 error
+error: compilation failed
