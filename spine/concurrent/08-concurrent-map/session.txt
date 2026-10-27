@@ -1,0 +1,6 @@
+$ java labs/Maps.java
+HashMap:           9987 accounts
+ConcurrentHashMap: 10000 accounts
+$ java labs/Maps.java
+HashMap:           9945 accounts
+ConcurrentHashMap: 10000 accounts

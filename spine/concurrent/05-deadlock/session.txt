@@ -1,0 +1,9 @@
+$ mvn -q compile
+$ java -cp target/classes labs/Transfers.java > run.log 2>&1 & echo $! > run.pid
+$ sleep 3
+$ jstack $(cat run.pid) | grep -E 'Found|held by' | sort
+  which is held by "ana-to-ben"
+  which is held by "ben-to-ana"
+Found 1 deadlock.
+Found one Java-level deadlock:
+$ kill $(cat run.pid)

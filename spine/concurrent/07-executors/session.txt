@@ -1,0 +1,3 @@
+$ mvn -q compile
+$ java -cp target/classes labs/Interest.java
+1000 tasks, 4 workers: interest 15000.00 EUR

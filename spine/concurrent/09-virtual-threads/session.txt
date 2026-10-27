@@ -1,0 +1,4 @@
+$ mvn -q compile
+$ java -cp target/classes labs/Payments.java
+platform pool of 200: 10000.00 EUR in about 587 ms
+virtual threads:      10000.00 EUR in about 116 ms

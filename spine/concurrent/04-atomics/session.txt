@@ -1,0 +1,8 @@
+$ java labs/Counters.java
+plain long:  98786
+AtomicLong:  100000
+LongAdder:   100000
+$ java labs/Counters.java
+plain long:  99769
+AtomicLong:  100000
+LongAdder:   100000

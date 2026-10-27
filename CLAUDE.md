@@ -34,7 +34,7 @@ audio via Colab.
 | 8 | `save` | 6 | authored |
 | 9 | `build` | 6 | authored |
 | 10 | `trust` | 6 | authored |
-| 11 | `concurrent` | 9 | |
+| 11 | `concurrent` | 9 | authored |
 | 12 | `ship` | 5 | |
 
 IDE side panes `spread` their blocks down the column (`ide.ts`): a few compact diagrams stacked at

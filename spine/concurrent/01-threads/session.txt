@@ -1,0 +1,5 @@
+$ mvn -q compile
+$ java -cp target/classes labs/Tellers.java
+4 tellers ran: teller-1 to teller-4
+main ran on main
+balance 1004.00 EUR
