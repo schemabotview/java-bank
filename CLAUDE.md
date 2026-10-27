@@ -18,9 +18,26 @@ Its infra is ported here; port, do not reinvent.
 
 ## Status
 
-Infra in (2026-10-27): toolchain installer, spine replay, IDE frame, checks, the app map. No course
-is authored, so `COURSES` is empty; the two scenes so far (`intro-what-we-build`,
-`start-bank`, a draft) are checked and shot at the shell's bare scene route. Next: Course 2, the pilot.
+Infra in (2026-10-27). Courses are authored in plan order (2 as the pilot, then 1, 3–12), each
+checked, shot, looked at and pushed before the next; narration is text until the owner's review, then
+audio via Colab.
+
+| # | Course | Sections | Status |
+| --- | --- | --- | --- |
+| 1 | `intro` | 2 | |
+| 2 | `start` | 6 | authored (pilot), awaiting review |
+| 3 | `hold` | 9 | |
+| 4 | `decide` | 10 | |
+| 5 | `model` | 10 | |
+| 6 | `collect` | 8 | |
+| 7 | `stream` | 6 | |
+| 8 | `save` | 6 | |
+| 9 | `build` | 6 | |
+| 10 | `trust` | 6 | |
+| 11 | `concurrent` | 9 | |
+| 12 | `ship` | 5 | |
+
+`scripts/look.sh <dir> <slug or scene>…` shoots at 4K and writes 1920×1080 copies for looking at.
 
 ## Route contract
 

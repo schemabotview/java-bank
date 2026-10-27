@@ -4,7 +4,7 @@ import { project } from './tree'
 import code from '../../../spine/start/02-bank/project/Bank.java?raw'
 import session from '../../../spine/start/02-bank/session.txt?raw'
 
-// §2 (draft; the infra's first IDE frame) — Bank.java, run with `java Bank.java`: the launcher
+// §2 — Bank.java, run with `java Bank.java`: the launcher
 // compiles the file in memory and runs main(). 120.50 prints as 120.5: a double keeps the number,
 // not how it was typed — the first hint that money is not a double (3.3).
 export const startBank: SceneModel = ideFrame({

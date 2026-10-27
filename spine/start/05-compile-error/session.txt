@@ -1,0 +1,8 @@
+$ java Bank.java
+Bank.java:6: error: cannot find symbol
+    IO.prinln("Interest this month: " + 120.50 * 0.015);
+      ^
+  symbol:   method prinln(String)
+  location: class IO
+1 error
+error: compilation failed

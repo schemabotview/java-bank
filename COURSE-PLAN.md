@@ -121,10 +121,10 @@ full scene. When in doubt, full scene.
 | --- | --- | --- | --- |
 | 1 | Install a JDK | `java --version` | JDK ⊃ runtime ⊃ JVM |
 | 2 | `Bank.java` | print one balance with `java Bank.java` | file → `java` launcher → stdout |
-| 3 | ◆ full scene: what `java Bank.java` does | concept + lab (`javac`, `javap -c`) | source → javac → bytecode → class loader → interpreter → JIT, the real `javap -c` of our line beside it |
-| 4 | jshell beside the editor | try `100 + 25`, then write it down | read → eval → print → loop |
-| 5 | Compile errors | a missing `;`, then `balanse`: nothing runs | the compiler stops the file; a typo is caught BEFORE running (the contrast with Python) |
-| 6 | A runtime exception | `ArithmeticException` | stack trace anatomy; compile time vs run time compared |
+| 3 | ◆ full scene: what `java Bank.java` does | concept + lab (`javac`, `javap -c`, `-Xlog:class+load`) | source → javac → bytecode → class loading → the JVM → output; javac folded `"…" + 120.50` into one string |
+| 4 | jshell beside the editor | try `120.50 * 0.015` (interest: `1.8074999999999999`), then write it down | read → eval → print → loop |
+| 5 | Compile errors | a typo `IO.prinln`: nothing runs; a missing `;` (lab) beside it | the compiler stops the file; a typo is caught BEFORE running (the contrast with Python) |
+| 6 | A runtime exception | `120 / 0`: `ArithmeticException`, lines 4–6 already printed | stack trace anatomy; compile time vs run time compared |
 
 **3. `hold` · Hold the data · 9**
 

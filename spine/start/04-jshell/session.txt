@@ -1,0 +1,12 @@
+$ jshell -q
+jshell> 120.50
+$1 ==> 120.5
+jshell> 120.50 + 25.10
+$2 ==> 145.6
+jshell> 120.50 * 0.015
+$3 ==> 1.8074999999999999
+jshell> /exit
+$ java Bank.java
+Syndica Bank: open
+Ana's balance: 120.5
+Interest this month: 1.8074999999999999

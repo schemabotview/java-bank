@@ -94,6 +94,8 @@ export interface Editor {
 export interface IdeFrame {
   /** The explorer's heading: the project folder. */
   project?: string
+  /** Where the terminal is, for its title; default the project (2.1's explorer is the JDK, its shell is home). */
+  cwd?: string
   tree: TreeEntry[]
   editor: Editor
   /** The step's session.txt, raw — marked for the terminal pane by `terminal()`. */
@@ -107,14 +109,14 @@ export interface IdeFrame {
 // Fixed ids: a section's `focus` can name `editor.L12`, `terminal`, or any id in the side pane.
 export const IDE_IDS = { explorer: 'explorer', editor: 'editor', terminal: 'terminal', side: 'side' } as const
 
-export function ideFrame({ project = 'ledger', tree, editor, session, side, edges = [] }: IdeFrame): SceneModel {
+export function ideFrame({ project = 'ledger', cwd = project, tree, editor, session, side, edges = [] }: IdeFrame): SceneModel {
   const explorer: Tree = { type: 'tree', id: IDE_IDS.explorer, title: project, entries: tree, fill: true, w: EXPLORER_W }
   const code: Code = {
     type: 'code', id: IDE_IDS.editor, filename: editor.file, lang: editor.lang ?? 'java', code: trim(editor.code),
     show: editor.show, highlight: editor.highlight, tone: 'ingest', fill: true, w: EDITOR_W, minH: EDITOR_H,
   }
   const term: Code = {
-    type: 'code', id: IDE_IDS.terminal, terminal: true, filename: `terminal — ${project}`, code: terminal(session),
+    type: 'code', id: IDE_IDS.terminal, terminal: true, filename: `terminal — ${cwd}`, code: terminal(session),
     fill: true, w: EDITOR_W, minH: TERMINAL_H,
   }
   const pane: Group = { type: 'group', id: IDE_IDS.side, bare: true, w: SIDE_W, minH: FRAME_H, children: side }

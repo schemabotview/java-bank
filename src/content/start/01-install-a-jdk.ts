@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const installAJdk: Section = {
+  id: 'install-a-jdk',
+  title: 'Install a JDK: the tools, the runtime and the JVM',
+  scene: 'start-jdk',
+  narration:
+    "Every Java program you will ever write starts with one download: a JDK, the Java Development Kit. Any OpenJDK 25 build will do. This one comes from Ubuntu's package manager, and on a Mac or on Windows you would install a build such as Temurin instead. Once it is installed, two questions in the terminal tell you it works. java dash dash version answers with three lines. The first says openjdk twenty five, the release this course uses. Java 25 is a long term support release, so it will be maintained for years. The third line names the virtual machine that will run our code, the OpenJDK 64-Bit Server VM, better known as HotSpot. javac dash dash version answers too, with the same number. Then we ask where java actually lives. readlink follows the links from the command to the real file, and it lands inside one folder, the JDK itself, which is open in the explorer on the left. Its bin folder holds twenty nine tools. In this course we will use a handful: javac, the compiler, jshell, javap, jar, and java. In the editor is the JDK's release file, a plain description of what was installed: the version, the date it was built, and a long list of modules, folded away here. The diagram on the right is the picture to keep. The JDK is everything you need to write Java. Inside it is the runtime, which is what you need to run Java: the java launcher and the class library, sixty nine modules of ready made code. And inside the runtime is the JVM, the engine that actually runs programs, with an interpreter, a just in time compiler and a garbage collector. Each of them gets its own moment later in the course. Finally, we make a folder for the bank, called ledger, and step into it. It is empty. In the next section it gets its first file.",
+}

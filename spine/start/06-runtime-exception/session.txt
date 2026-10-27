@@ -1,0 +1,6 @@
+$ java Bank.java
+Syndica Bank: open
+Ana's balance: 120.5
+Interest this month: 1.8074999999999999
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Bank.main(Bank.java:7)

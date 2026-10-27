@@ -1,0 +1,29 @@
+$ javac Bank.java
+$ ls
+Bank.class
+Bank.java
+$ javap -c Bank
+Compiled from "Bank.java"
+final class Bank {
+  Bank();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  void main();
+    Code:
+         0: ldc           #7                  // String Syndica Bank: open
+         2: invokestatic  #9                  // Method java/lang/IO.println:(Ljava/lang/Object;)V
+         5: ldc           #15                 // String Ana\'s balance: 120.5
+         7: invokestatic  #9                  // Method java/lang/IO.println:(Ljava/lang/Object;)V
+        10: return
+}
+$ java Bank
+Syndica Bank: open
+Ana's balance: 120.5
+$ java -Xlog:class+load:stdout:none Bank | grep -c source:
+417
+$ java -Xlog:class+load:stdout:none Bank | grep -E '^(Bank|java.lang.IO) '
+Bank source: file:/home/ana/ledger/
+java.lang.IO source: jrt:/java.base

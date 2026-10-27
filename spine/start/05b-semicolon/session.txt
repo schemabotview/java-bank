@@ -1,0 +1,6 @@
+$ java Bank.java
+Bank.java:4: error: ';' expected
+    IO.println("Syndica Bank: open")
+                                    ^
+1 error
+error: compilation failed

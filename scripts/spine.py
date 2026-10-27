@@ -38,7 +38,9 @@ Build output (*.class, target/, out/) is never compared.
 
 step.json (other keys, all optional):
   {"start": "home"}             start in the directory ABOVE the project (default: the project)
-  {"capture": ["path", ...]}    files the session creates that a scene shows; saved to captured/
+  {"capture": ["path", ...]}    files a scene shows; saved to captured/. A relative path is in the
+                                project; an absolute one is the machine's (the JDK's `release`, 2.1),
+                                saved under captured/ without its leading slash
   {"project": "name"}           the folder's name (default ledger): a lab is not the spine
   {"volatile": true}            output carries ids or timings that change every run: compared with every
                                 digit and identity hash (`Account@1b6d3586`) masked, so the text and
@@ -292,7 +294,7 @@ def main() -> int:
         if write:
             (step / 'session.txt').write_text(transcript)
             for file, text in captured.items():
-                target = step / 'captured' / file
+                target = step / 'captured' / file.lstrip('/')
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(text)
             print(f'wrote {name}')
@@ -304,7 +306,7 @@ def main() -> int:
             import difflib
             sys.stdout.writelines(difflib.unified_diff(expected.splitlines(True), transcript.splitlines(True), 'session.txt', 'real run'))
         for file, text in captured.items():
-            if (step / 'captured' / file).read_text() != text:
+            if (step / 'captured' / file.lstrip('/')).read_text() != text:
                 problems += 1
                 print(f'✗ {name}: captured/{file} differs from a real run')
     if not write:
