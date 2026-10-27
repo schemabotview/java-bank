@@ -1,0 +1,12 @@
+$ jlink -p target/ledger-1.0.jar --add-modules ledger --output runtime
+$ runtime/bin/java --list-modules
+java.base@25.0.4.1
+jdk.httpserver@25.0.4.1
+ledger@1.0
+$ du -sh runtime /usr/lib/jvm/java-25-openjdk-amd64
+60M	runtime
+330M	/usr/lib/jvm/java-25-openjdk-amd64
+$ runtime/bin/java -Dledger.port=9090 -m ledger/ledger.Server > s.log 2>&1 & echo $! > pid; sleep 2
+$ curl -s localhost:9090/accounts/SB-0002
+{"number": "SB-0002", "holder": "Ben", "balance": "270.00 EUR"}
+$ kill $(cat pid)

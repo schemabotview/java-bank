@@ -24,7 +24,7 @@ audio via Colab.
 
 | # | Course | Sections | Status |
 | --- | --- | --- | --- |
-| 1 | `intro` | 2 | authored; 1.2 gets the finished bank's real output after Course 12 |
+| 1 | `intro` | 2 | authored (1.2 shows the finished bank's real replies, from 12.1) |
 | 2 | `start` | 6 | authored (pilot) |
 | 3 | `hold` | 9 | authored |
 | 4 | `decide` | 10 | authored |
@@ -35,7 +35,7 @@ audio via Colab.
 | 9 | `build` | 6 | authored |
 | 10 | `trust` | 6 | authored |
 | 11 | `concurrent` | 9 | authored |
-| 12 | `ship` | 5 | |
+| 12 | `ship` | 5 | authored |
 
 IDE side panes `spread` their blocks down the column (`ide.ts`): a few compact diagrams stacked at
 the top left the lower half empty, and `check` fails a pane under 2/3 filled.

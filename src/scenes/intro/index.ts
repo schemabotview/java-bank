@@ -1,10 +1,12 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
 import { appMap } from '../map'
 import s1 from '../../../spine/intro/01-java/session.txt?raw'
+import finished from '../../../spine/ship/01-http-api/session.txt?raw'
+import { outputOf } from '../lab'
 
 // Course 1 — Java, and what we'll build. Two concept scenes: Java answering for itself (the intro
-// lab, replayed on the course's JDK), and the bank's map before anything is built. 1.2 is rebuilt to
-// show the FINISHED bank's real output once Course 12 exists (the payoff first, as in Python's).
+// lab, replayed on the course's JDK), and the bank's map with the FINISHED bank's real replies from
+// Course 12's session (the payoff first, as in Python's). The transfer command is shown wrapped.
 const java1: SceneModel = {
   title: 'Java',
   sub: 'a typed, compiled language on a virtual machine: thirty years old, and running the world’s money',
@@ -32,5 +34,17 @@ const java1: SceneModel = {
 
 export const introScenes: Record<string, SceneModel> = {
   'intro-java': java1,
-  'intro-what-we-build': appMap({ title: "What we'll build: Syndica Bank's ledger", sub: 'from one balance to a transfer service, one Java feature at a time', built: 0 }),
+  'intro-what-we-build': appMap({
+    title: "What we'll build: Syndica Bank's ledger",
+    sub: 'from one balance to a transfer service. On the right: the finished bank, really answering',
+    built: 12,
+    output: {
+      type: 'code', id: 'out-api', terminal: true, filename: 'terminal: the end of the course',
+      code: [
+        '$ curl -s localhost:8080/accounts/SB-0001', outputOf(finished, 'curl -s localhost:8080/accounts/SB-0001'),
+        "$ curl -s -d 'from=SB-0001&to=SB-0002&amount=25' \\", '    localhost:8080/transfers',
+        outputOf(finished, "curl -s -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers"),
+      ].join('\n'),
+    },
+  }),
 }

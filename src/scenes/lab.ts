@@ -7,5 +7,7 @@ export function outputOf(session: string, command: string): string {
   const blocks = trim(session).split(/^\$ /m).slice(1)
   const block = blocks.find((b) => b.split('\n')[0] === command)
   if (block === undefined) throw new Error(`lab.ts: no command ${JSON.stringify(command)} in the session`)
-  return block.split('\n').slice(1).map((line) => line.trimEnd()).join('\n')
+  // trim(): a block ends where the next `$ ` starts, so all but the last keep a trailing newline —
+  // which split('\n') turned into an empty last row (build-modules' table had one for a course).
+  return trim(block).split('\n').slice(1).map((line) => line.trimEnd()).join('\n')
 }

@@ -1,0 +1,11 @@
+$ bin/serve > server.log 2>&1 & echo $! > server.pid
+$ sleep 2
+$ curl -s -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers
+{"paid": "25.00 EUR", "SB-0001": "1137.28 EUR"}
+$ curl -s -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers
+{"paid": "25.00 EUR", "SB-0001": "1112.28 EUR"}
+$ curl -s -H 'Idempotency-Key: t-7' -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers
+{"paid": "25.00 EUR", "SB-0001": "1087.28 EUR"}
+$ curl -s -H 'Idempotency-Key: t-7' -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers
+{"paid": "25.00 EUR", "SB-0001": "1087.28 EUR"}
+$ kill $(cat server.pid)

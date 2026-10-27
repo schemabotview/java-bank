@@ -8,7 +8,7 @@ with `@graphlearning/graphl-flow`; the app shell is `@graphlearning/shell`.
 Published as **one video: "Learn Java by building a bank: full course, beginner to professional"**
 (~2 h 05 min, 12 courses, 83 sections).
 
-**Status:** being authored course by course (see the table in [`CLAUDE.md`](CLAUDE.md)). Scope, sections and diagrams are in
+**Status:** all 12 courses (83 sections) authored, with narration as text; audio and recording follow the owner's review (see the table in [`CLAUDE.md`](CLAUDE.md)). Scope, sections and diagrams are in
 [`COURSE-PLAN.md`](COURSE-PLAN.md).
 
 ## Run it

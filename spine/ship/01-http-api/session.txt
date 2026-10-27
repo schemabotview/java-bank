@@ -1,0 +1,12 @@
+$ mvn -q package
+$ bin/serve > server.log 2>&1 & echo $! > server.pid
+$ sleep 2
+$ curl -s localhost:8080/accounts/SB-0001
+{"number": "SB-0001", "holder": "Ana", "balance": "1162.28 EUR"}
+$ curl -s localhost:8080/accounts/SB-0009
+{"error": "no account SB-0009"}
+$ curl -s -d 'from=SB-0001&to=SB-0002&amount=25' localhost:8080/transfers
+{"paid": "25.00 EUR", "SB-0001": "1137.28 EUR"}
+$ curl -s localhost:8080/accounts/SB-0002
+{"number": "SB-0002", "holder": "Ben", "balance": "295.00 EUR"}
+$ kill $(cat server.pid)

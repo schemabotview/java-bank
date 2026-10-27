@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Start the bank's API from the jar: ledger.Server, in the foreground.
+exec java -cp target/ledger-1.0.jar ledger.Server "$@"

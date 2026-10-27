@@ -1,0 +1,7 @@
+$ mvn -q package
+$ bin/serve > server.log 2>&1 & echo $! > server.pid
+$ sleep 2
+$ java labs/Client.java
+200 {"number": "SB-0001", "holder": "Ana", "balance": "1162.28 EUR"}
+200 {"number": "SB-0001", "holder": "Ana", "balance": "1161.28 EUR"}
+$ kill $(cat server.pid)
