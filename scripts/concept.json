@@ -4,5 +4,9 @@
   "site": "https://graphl.in",
   "appPath": "/java-bank",
   "hashtags": "#Java #LearnJava #Programming #TechEducation",
-  "panelBg": "radial-gradient(118% 104% at 70% 34%, #f6a54a 0%, #c9690f 44%, #12161c 100%)"
+  "panelBg": "radial-gradient(118% 104% at 70% 34%, #f6a54a 0%, #c9690f 44%, #12161c 100%)",
+  "film": {
+    "title": "Learn Java by building a bank: full course, beginner to professional",
+    "blurb": "Every line of code is really run on OpenJDK 25.0.4.1 — every banner, compiler error, stack trace and printed value you see is real output."
+  }
 }

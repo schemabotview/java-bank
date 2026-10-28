@@ -1,0 +1,50 @@
+Duke, the Java mascot (output/thumbnails/film-duke.png)
+=======================================================
+
+WHAT THIS COVERS
+----------------
+`npm run thumb:film -- --mark duke` draws Duke, the Java mascot. It is NOT Oracle's
+steaming-coffee-cup Java logo, which this repo does not use anywhere.
+
+The geometry is not vendored here and not retyped. @graphlearning/graphl-flow bundles it as the
+BRAND mark `openjdk`, carrying its own provenance, which the engine records as:
+
+  source:  https://hg.openjdk.java.net/duke/duke/file/ca00f100dafc/vector/Agent.svg
+  licence: BSD-3-Clause  (https://spdx.org/licenses/BSD-3-Clause)
+  hex:     #000000
+
+`scripts/thumb-film.mjs` reads that path straight out of the engine, so the cover draws the same
+Duke the scenes draw, and the render FAILS if the engine ever stops shipping it.
+
+WHY THIS IS A DIFFERENT QUESTION FROM THE CUP
+---------------------------------------------
+Sun open-sourced Duke in 2006 and the artwork has lived in the OpenJDK project under BSD-3-Clause
+ever since. BSD-3-Clause is a COPYRIGHT licence, and it grants use and redistribution — so this is
+the pandas situation in the sister data-science repo, not the Python or Spark one.
+
+Oracle's Java logo is the opposite case: it is Oracle's mark, Oracle licenses its logos through its
+own programmes rather than by default, and a cup drawn by us would be the "confusingly similar"
+case. Naming Java in the title, the narration and the description is nominative use and is a
+separate, allowed thing.
+
+COPYRIGHT AND TRADEMARK ARE STILL DIFFERENT QUESTIONS
+-----------------------------------------------------
+BSD-3-Clause grants the copyright in the artwork. It does not grant a trademark, and Duke still
+reads as Java's mascot. So on this cover Duke is used ILLUSTRATIVELY — to name the language the
+course teaches — and never as this course's own identity, which stays the GraphL wordmark and the
+FULL COURSE badge. The cover does not suggest Oracle or the OpenJDK project produced, endorsed or
+sponsored it.
+
+BEFORE PUBLISHING WITH --mark duke
+----------------------------------
+BSD-3-Clause clause 2 asks that a binary redistribution reproduce the upstream copyright notice,
+the conditions and the disclaimer "in the documentation and/or other materials provided with the
+distribution". A published thumbnail is such a redistribution, and this file is where that notice
+belongs.
+
+TODO before the video goes out with this mark: copy the exact upstream copyright line and the full
+BSD-3-Clause text out of the OpenJDK duke repository (the `source` URL above) into this file. It is
+deliberately NOT paraphrased here — an approximate copyright line is worse than none.
+
+The alternative needs no notice at all: `--mark braces` draws a pair of braces of our own, which is
+what `film.png` ships today.

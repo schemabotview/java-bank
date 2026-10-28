@@ -1,0 +1,94 @@
+Learn Java by building a bank: full course, beginner to professional
+
+83 sections, 12 courses, 2:30:48.
+Every line of code is really run on OpenJDK 25.0.4.1 — every banner, compiler error, stack trace and printed value you see is real output.
+
+⏱ CHAPTERS
+0:00:00 ▸ Java, and what we'll build — What Java is, and where it runs
+0:01:46 What we'll build
+0:03:38 ▸ The first program — Install a JDK: the tools, the runtime and the JVM
+0:05:29 Bank.java: the first lines, run with java
+0:07:24 What java Bank.java does
+0:09:28 jshell beside the editor: try a line first
+0:11:18 A compile error: found before anything runs
+0:13:07 An exception: found while it runs
+0:14:57 ▸ Hold the data — Variables and types: every name has one
+0:16:39 Primitives and references: the stack and the heap
+0:18:27 Why money is not a double
+0:20:13 BigDecimal: exact money
+0:22:06 Strings: text you cannot change
+0:23:55 == and equals: same object, or same text?
+0:25:38 Text blocks: a statement header
+0:27:24 Arrays: one day's transactions
+0:29:18 null: a reference to nothing
+0:31:05 ▸ Decide, repeat, react — Expressions: a year of interest
+0:32:44 Integer overflow: a deposit that turns negative
+0:34:36 if and else: pay out only what is there
+0:36:24 switch expressions: a fee for each account type
+0:38:06 for loops: a day of transactions
+0:39:50 while and readln: the teller loop
+0:41:34 Methods and the call stack
+0:43:23 Pass by value: a fee that wasn't charged
+0:45:14 try and catch: bad input does not stop the bank
+0:47:02 throw: the bank refuses a request
+0:48:49 ▸ Model the bank — A class: Account
+0:50:38 Encapsulation: private fields
+0:52:23 Constructors and this: never invalid
+0:54:11 static: one counter for every account
+0:55:56 Enums: the kinds of account
+0:57:47 Records: Money as a value
+0:59:45 equals and hashCode: entities and values
+1:01:36 Interfaces and composition: interest policies
+1:03:35 Sealed types and pattern matching: transactions
+1:05:27 Checked exceptions: insufficient funds
+1:07:16 ▸ Many accounts — ArrayList: the ledger
+1:09:03 HashMap: accounts by number
+1:10:54 Set: flagged accounts
+1:12:39 Removing while iterating
+1:14:25 Generics: one Page for everything
+1:16:10 Comparable: sort by day, then amount
+1:17:56 Optional: an account that may not exist
+1:19:47 Unmodifiable lists: a statement is final
+1:21:36 ▸ Statements — Lambdas: a review rule as a value
+1:23:24 Method references: sorting by account, then day
+1:25:18 filter, map, reduce: the balance is a fold of the ledger
+1:27:04 groupingBy: monthly statements
+1:28:57 Laziness: stop at the first match
+1:30:46 When a loop reads better
+1:32:30 ▸ The journal — Path and Files: a journal on disk
+1:34:21 Replay: the bank rebuilt on start
+1:36:07 try-with-resources: a buffer that must be closed
+1:38:00 Importing a statement: bad rows rejected, not fatal
+1:39:53 java.time: interest at the end of the month
+1:41:40 Time zones: whose midnight?
+1:43:27 ▸ A real project — Packages: three folders, three namespaces
+1:45:25 The classpath and class loading
+1:47:22 Maven: pom.xml and the standard layout
+1:49:21 Dependencies: JUnit, and everything it needs
+1:51:16 A runnable jar: java -jar
+1:53:03 Modules: what the ledger lets others use
+1:55:00 ▸ Tests and the JVM — A first JUnit test
+1:56:52 assertThrows: an overdraft is refused
+1:58:33 Parameterized tests: the interest table
+2:00:16 Testing time: a Clock you can stop
+2:01:59 Logging: an audit trail with System.Logger
+2:03:50 The heap and the garbage collector
+2:05:45 ▸ Many tellers at once — Threads: four tellers at once
+2:07:18 The race: money lost
+2:08:57 synchronized and happens-before
+2:10:42 Atomics: counting without a lock
+2:12:27 Deadlock: two transfers, stuck forever
+2:14:12 Lock ordering: no cycle, no deadlock
+2:16:01 ExecutorService and Future: a pool of workers
+2:17:51 ConcurrentHashMap: a map for many threads
+2:19:36 Virtual threads: ten thousand payments
+2:21:33 ▸ The service — An HTTP API on the JDK server
+2:23:30 Idempotency keys: a retry pays once
+2:25:20 HttpClient: the API from Java
+2:27:15 Configuration and jlink: a runtime of its own
+2:29:03 Where next
+
+🔗 Watch interactively on GraphL → https://graphl.in/java-bank/#/
+🌐 More concepts → https://graphl.in
+
+#Java #LearnJava #Programming #TechEducation

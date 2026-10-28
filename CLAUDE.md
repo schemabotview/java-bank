@@ -19,23 +19,27 @@ Its infra is ported here; port, do not reinvent.
 ## Status
 
 Infra in (2026-10-27). Courses are authored in plan order (2 as the pilot, then 1, 3–12), each
-checked, shot, looked at and pushed before the next; narration is text until the owner's review, then
-audio via Colab.
+checked, shot, looked at and pushed before the next.
+
+Narrated and recorded 2026-10-28: all 83 wavs in (Colab + Chatterbox, pushed per file), every course
+captured at 3840×2160 (`npm run record:all`, 2 h 08 of wall time, no skips), and combined into the
+single YouTube film (`npm run film` → `scripts/out/film.mp4`, 2 h 30 min, 83 chapters). The
+description and the cover are in `output/`. Awaiting the owner's review of the whole course.
 
 | # | Course | Sections | Status |
 | --- | --- | --- | --- |
-| 1 | `intro` | 2 | authored (1.2 shows the finished bank's real replies, from 12.1) |
-| 2 | `start` | 6 | authored (pilot) |
-| 3 | `hold` | 9 | authored |
-| 4 | `decide` | 10 | authored |
-| 5 | `model` | 10 | authored |
-| 6 | `collect` | 8 | authored |
-| 7 | `stream` | 6 | authored |
-| 8 | `save` | 6 | authored |
-| 9 | `build` | 6 | authored |
-| 10 | `trust` | 6 | authored |
-| 11 | `concurrent` | 9 | authored |
-| 12 | `ship` | 5 | authored |
+| 1 | `intro` | 2 | authored, narrated, recorded 4K (1.2 shows the finished bank's real replies, from 12.1) |
+| 2 | `start` | 6 | authored, narrated, recorded 4K (pilot) |
+| 3 | `hold` | 9 | authored, narrated, recorded 4K |
+| 4 | `decide` | 10 | authored, narrated, recorded 4K |
+| 5 | `model` | 10 | authored, narrated, recorded 4K |
+| 6 | `collect` | 8 | authored, narrated, recorded 4K |
+| 7 | `stream` | 6 | authored, narrated, recorded 4K |
+| 8 | `save` | 6 | authored, narrated, recorded 4K |
+| 9 | `build` | 6 | authored, narrated, recorded 4K |
+| 10 | `trust` | 6 | authored, narrated, recorded 4K |
+| 11 | `concurrent` | 9 | authored, narrated, recorded 4K |
+| 12 | `ship` | 5 | authored, narrated, recorded 4K |
 
 IDE side panes `spread` their blocks down the column (`ide.ts`): a few compact diagrams stacked at
 the top left the lower half empty, and `check` fails a pane under 2/3 filled.
@@ -93,16 +97,17 @@ columns, as a stack trace's `\tat` does in a terminal. **Every IDE side pane car
 a bullet list. No edges between panes. A detour (◆) is a side-pane diagram when it pictures the code
 on screen, and a full concept scene when it cannot fit the side pane at ≥ 24px; see `COURSE-PLAN.md`.
 
-## Engine gaps (graphl-flow, not fixable here)
+## Engine gaps (graphl-flow)
 
-- **Java highlighting is thin.** `highlight.ts`'s keyword set is shared across languages and lacks
-  most of Java's: `int`, `long`, `double`, `boolean`, `final`, `record`, `sealed`, `permits`,
-  `switch`, `throws`, `package`, `synchronized`… They draw as plain names. `void`, `new`,
-  `class`, `public`, `static` and `this` do highlight.
-- **No Java-world icons.** No Java/OpenJDK, Maven, JUnit or Spring mark; use lucide keys.
+Both of the 0.4.0 gaps are CLOSED in 0.5.0 (bumped 2026-10-27, commit 37ca8d6):
 
-Both are an engine minor release (a keyword set per language; brand keys). Raise them before the
-courses that lean on them, not here.
+- **Java highlighting.** The shared keyword set now carries Java's own, primitives included —
+  `int`, `long`, `double`, `boolean`, `final`, `record`, `sealed`, `permits`, `switch`, `throws`,
+  `package`, `synchronized` and the rest.
+- **Java-world icons.** BRAND now ships `openjdk` (Duke — from the OpenJDK duke repo,
+  BSD-3-Clause), `maven`, `junit`, `docker`, `kafka` and `postgresql`.
+
+Still missing: a **Spring** mark (12.5's "Where next" uses a lucide `globe` for Spring Boot).
 
 ## Checks, before handing over
 
@@ -123,11 +128,18 @@ not proof.
 - Narration: `.tts` → `.wav` via Colab + Chatterbox only. Audio at `public/audio/<course>/<id>.wav`.
   `scripts/audio-manifest.json` (`npm run gen:audio`, 83 sections) and the Colab notebook
   (`scripts/colab_generate_audio.ipynb`, `REPO = "java-bank"`) are in; regenerate and commit the
-  manifest after any narration edit. `film.mjs` and `thumb-film.mjs` are ported from
-  python-expense-tracker when the audio is in.
+  manifest after any narration edit. `film.mjs` is ported (`npm run film`: stream-copy concat of
+  every segment, chapter offsets from the PROBED durations, one linear loudnorm to -14 LUFS); its
+  title and blurb live in `scripts/concept.json` under `film`, not in the code.
 - The app is JDK only. JUnit arrives with Maven in Course 9.
 - `SiteHeader` on the catalog page only.
 - The bank's name is Syndica Bank, never a real bank's.
+- Publish assets are in `output/`: `film-description.txt` (the YouTube description, a copy of
+  `scripts/out/film.txt`) and `thumbnails/` (`npm run thumb:film`, variants + its own README).
+  The cover never carries Oracle's Java cup. It ships a pair of braces of our own; `--mark duke`
+  draws Duke instead — the OpenJDK mascot, BSD-3-Clause, bundled by graphl-flow as BRAND `openjdk`
+  — and needs `output/thumbnails/NOTICE-duke.txt` completed first. Every figure on the card is
+  parsed out of ONE spine `session.txt`; a missing line is a hard error, so it cannot drift.
 
 ## Working agreement
 
