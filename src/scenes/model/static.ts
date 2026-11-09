@@ -9,7 +9,7 @@ import session from '../../../spine/model/04-static/session.txt?raw'
 // §4 — static: ONE counter on the class, shared by every account; each object keeps its own number.
 // final fields can be set once, in the constructor. The numbers are the session's.
 export const modelStatic: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'static: one per class, not per object',
   tree: files(['Account.java', 'Bank.java'], 'Account.java'),
   editor: { file: 'Account.java', code, ...view(code, 'class Account', 'this.number'), highlight: [lineOf(code, 'private static int opened'), lineOf(code, 'opened++'), lineOf(code, 'this.number')] },
   session,
@@ -28,10 +28,10 @@ export const modelStatic: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'kinds', title: 'static or not', tone: 'ingest', columns: ['', 'belongs to', 'called as'], rows: [
-        ['opened, opened()', 'the class: one copy', 'Account.opened()'],
-        ['number, holder()', 'each object', 'ana.holder()'],
+        ['opened', 'the class', 'Account.…'],
+        ['holder()', 'each object', 'ana.…'],
       ],
     },
   ],
-  edges: [{ from: 'cls.opened', to: 'heap', label: 'counts' }],
+  edges: [{ from: 'cls.opened', to: 'a1' }, { from: 'cls.opened', to: 'a2' }, { from: 'cls.opened', to: 'a3' }],
 })

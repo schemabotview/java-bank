@@ -7,7 +7,7 @@ import session from '../../../spine/model/01-class/session.txt?raw'
 // §1 — a class: Account is a blueprint; `new Account()` makes objects, each with its own fields.
 // Ben's -420.00 is the session's: nothing yet stops a direct write.
 export const modelClass: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A class is a blueprint; new makes objects',
   tree: files(['Account.java', 'Bank.java'], 'Account.java', ['Account.java']),
   editor: { file: 'Account.java', code },
   session,
@@ -25,14 +25,15 @@ export const modelClass: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'terms', title: 'The words', tone: 'ingest', columns: ['word', 'means'], rows: [
-        ['class', 'the blueprint: fields and methods'],
-        ['object', 'one thing built from it, by new'],
-        ['field', 'a variable each object has'],
-        ['method', 'code that works on its own object'],
+        ['class', 'the blueprint'],
+        ['object', 'one built by new'],
+        ['field', 'each object’s own'],
+        ['method', 'works on its object'],
       ],
     },
   ],
   edges: [
-    { from: 'cls', to: 'heap', label: 'new, twice' },
+    { from: 'cls', to: 'ana' },
+    { from: 'cls', to: 'ben' },
   ],
 })

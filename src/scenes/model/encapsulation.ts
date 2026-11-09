@@ -9,13 +9,13 @@ import session from '../../../spine/model/02-encapsulation/session.txt?raw'
 // §2 — encapsulation: private fields, a constructor to fill them, and methods as the only way in.
 // main's direct write no longer compiles (the session's two errors).
 export const modelEncapsulation: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Private fields, public methods',
   tree: files(['Account.java', 'Bank.java'], 'Account.java'),
   editor: { file: 'Account.java', code, ...view(code, 'class Account', undefined, 0), highlight: [lineOf(code, 'private String holder'), lineOf(code, 'private BigDecimal balance')] },
   session,
   side: [
     {
-      type: 'group', id: 'wall', title: 'The invariant wall', icon: 'shield', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'wall', title: 'The invariant wall', icon: 'shield', tone: 'ingest', children: [
         { type: 'item', id: 'outside', title: 'Bank.main()', sub: 'outside the class', icon: 'user' },
         { type: 'item', id: 'methods', title: 'deposit, withdraw, balance()', sub: 'the only ways in', icon: 'key', tone: 'store' },
         { type: 'item', id: 'inside', title: 'private balance', sub: 'never below zero', icon: 'lock' },
@@ -24,18 +24,19 @@ export const modelEncapsulation: SceneModel = ideFrame2({
     {
       type: 'table', id: 'access', title: 'Who can see a member', tone: 'ingest', columns: ['marked', 'visible to'], rows: [
         { id: 'private', cells: ['private', 'this class only'], tone: 'store' },
-        ['(nothing)', 'classes in the same package'],
+        ['(nothing)', 'the same package'],
         ['public', 'every class'],
       ],
     },
     {
       type: 'table', id: 'read', title: 'Read, but never write', tone: 'store', columns: ['method', 'gives back'], rows: [
         ['holder()', 'the holder'],
-        ['balance()', 'the balance: a BigDecimal, which cannot be changed'],
+        ['balance()', 'an immutable BigDecimal'],
       ],
     },
   ],
   edges: [
+    { from: 'wall', to: 'access' },
     { from: 'outside', to: 'methods' },
     { from: 'methods', to: 'inside' },
   ],

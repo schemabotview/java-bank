@@ -8,21 +8,21 @@ import session from '../../../spine/model/07-equals/session.txt?raw'
 // §7 — equals and hashCode: an Account is an ENTITY (equal only to itself), Money a VALUE (equal by
 // what it holds). jshell's Key vs RKey: a class without equals counts one key twice in a HashSet.
 export const modelEquals: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Entities by identity; values by content',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java', 'Money.java'], 'Bank.java'),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'Set<Money> amounts', 'distinct amounts') },
   session,
   side: [
     {
-      type: 'table', id: 'kinds', title: 'Two kinds of object', tone: 'ingest', columns: ['', 'entity: Account', 'value: Money'], rows: [
-        ['equal when', 'it is the same object', 'it holds the same thing'],
-        ['here', 'Ana ≠ her twin: false', '10 = 10.00: true'],
-        ['equals from', 'Object: identity', 'the record: its fields'],
+      type: 'table', id: 'kinds', title: 'Two kinds of object', tone: 'ingest', columns: ['', 'Account', 'Money'], rows: [
+        ['equal if', 'same object', 'same value'],
+        ['here', 'twin: false', '10 = 10.00'],
+        ['equals', 'Object’s', 'the record’s'],
       ],
     },
     {
       type: 'table', id: 'set', title: 'Two equal keys in a HashSet', tone: 'consume', columns: ['type', 'size'], rows: [
-        { id: 'key', cells: ['class Key, no equals', '2: a duplicate'], tone: 'consume' },
+        { id: 'key', cells: ['Key, no equals', '2: a duplicate'], tone: 'consume' },
         { id: 'rkey', cells: ['record RKey', '1'], tone: 'store' },
       ],
     },
@@ -33,5 +33,5 @@ export const modelEquals: SceneModel = ideFrame2({
       ],
     },
   ],
-  edges: [{ from: 'h-code', to: 'h-eq' }],
+  edges: [{ from: 'set', to: 'hash' }, { from: 'h-code', to: 'h-eq' }],
 })

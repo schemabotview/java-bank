@@ -9,7 +9,7 @@ import session from '../../../spine/model/03-constructors/session.txt?raw'
 // §3 — constructors: the checks run BEFORE the fields are set, so an invalid Account never exists;
 // the short constructor hands over to the long one with this(…).
 export const modelConstructors: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A constructor refuses a bad object',
   tree: files(['Account.java', 'Bank.java'], 'Account.java'),
   editor: { file: 'Account.java', code, ...view(code, 'Account(String holder, BigDecimal opening)', 'this(holder, BigDecimal.ZERO)', 0), highlight: linesFrom(code, 'if (holder == null', 'opening balance below') },
   session,
@@ -22,9 +22,9 @@ export const modelConstructors: SceneModel = ideFrame2({
       ],
     },
     {
-      type: 'table', id: 'two', title: 'Two constructors', tone: 'ingest', columns: ['called as', 'does'], rows: [
-        ['new Account("Ana", 120.50)', 'checks, then sets the fields'],
-        { id: 'short', cells: ['new Account("Ben")', 'this("Ben", BigDecimal.ZERO)'], tone: 'store' },
+      type: 'table', id: 'two', title: 'Two constructors', tone: 'ingest', columns: ['new Account', 'does'], rows: [
+        ['…("Ana", 120.50)', 'checks, sets'],
+        { id: 'short', cells: ['…("Ben")', 'this("Ben", ZERO)'], tone: 'store' },
       ],
     },
   ],

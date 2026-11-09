@@ -12,7 +12,7 @@ import unreported from '../../../spine/model/10b-unreported/session.txt?raw'
 const refusal = outputOf(unreported, 'java Bank.java').split('\n')[0].replace(/^Bank\.java:\d+: error: /, '')
 
 export const modelChecked: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Checked: the compiler makes you plan',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java', 'InsufficientFundsException.java', 'InterestPolicy.java', 'Money.java', 'Promotion.java', 'Transaction.java'], 'Bank.java', ['InsufficientFundsException.java']),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'try {', 'declined') },
   session,
@@ -20,25 +20,26 @@ export const modelChecked: SceneModel = ideFrame2({
     {
       type: 'group', id: 'family', bare: true, dir: 'row', children: [
         {
-          type: 'group', id: 'checked', title: 'checked: extends Exception', icon: 'shield', tone: 'store', children: [
-            { type: 'item', id: 'c-ins', title: 'InsufficientFundsException', sub: 'a normal outcome to plan for', icon: 'bell' },
-            { type: 'item', id: 'c-io', title: 'IOException', sub: 'a file that will not open', icon: 'file' },
+          type: 'group', id: 'checked', title: 'checked: …Exception', icon: 'shield', tone: 'store', children: [
+            { type: 'item', id: 'c-ins', title: 'InsufficientFunds', sub: 'plan for it', icon: 'bell' },
+            { type: 'item', id: 'c-io', title: 'IOException', sub: 'a missing file', icon: 'file' },
           ],
         },
         {
-          type: 'group', id: 'unchecked', title: 'unchecked: RuntimeException', icon: 'bell', tone: 'consume', children: [
-            { type: 'item', id: 'u-arg', title: 'IllegalArgumentException', sub: 'a bug in the caller', icon: 'code' },
-            { type: 'item', id: 'u-npe', title: 'NullPointerException', sub: 'a bug, full stop', icon: 'code' },
+          type: 'group', id: 'unchecked', title: 'unchecked', icon: 'bell', tone: 'consume', children: [
+            { type: 'item', id: 'u-arg', title: 'IllegalArgument', sub: 'a caller’s bug', icon: 'code' },
+            { type: 'item', id: 'u-npe', title: 'NullPointer', sub: 'a bug', icon: 'code' },
           ],
         },
       ],
     },
     {
       type: 'table', id: 'rules', title: 'The compiler checks', tone: 'ingest', columns: ['kind', 'a caller must'], rows: [
-        { id: 'chk', cells: ['checked', 'catch it, or declare throws'], tone: 'store' },
-        { id: 'unchk', cells: ['unchecked', 'nothing: it may just crash'], tone: 'consume' },
+        { id: 'chk', cells: ['checked', 'catch or throws'], tone: 'store' },
+        { id: 'unchk', cells: ['unchecked', 'nothing'], tone: 'consume' },
       ],
     },
+    { type: 'item', id: 'refused', title: 'without the try: no compile', sub: refusal, icon: 'bell', tone: 'consume' },
     {
       type: 'table', id: 'today', title: 'The day, in main()', tone: 'ingest', columns: ['transaction', 'outcome'], rows: [
         ['Withdrawal 40.00', 'done: 80.50'],
@@ -46,5 +47,9 @@ export const modelChecked: SceneModel = ideFrame2({
         ['Deposit 25.10', 'done: 105.60'],
       ],
     },
+  ],
+  edges: [
+    { from: 'family', to: 'rules' },
+    { from: 'rules', to: 'refused' },
   ],
 })
