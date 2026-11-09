@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/01-threads/project/labs/Tellers.java?raw'
 import session from '../../../spine/concurrent/01-threads/session.txt?raw'
 
 // §1 — threads: four tellers, each its own thread with its own stack, all sharing one Account on
 // the heap; join() waits for each. The result is printed after every thread has finished.
-export const concurrentThreads: SceneModel = ideFrame({
+export const concurrentThreads: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Tellers.java', ['Tellers.java'], ['Tellers.java']),
   editor: { file: 'labs/Tellers.java', code, highlight: [...linesFrom(code, 'Thread t = new Thread', 't.start()'), ...linesFrom(code, 'for (Thread t : tellers)', 't.join()')] },
   session,
@@ -35,7 +37,6 @@ export const concurrentThreads: SceneModel = ideFrame({
         ['t.join()', 'main waits until it ends'],
       ],
     },
-    { type: 'note', id: 'shared', tone: 'consume', text: 'Each thread has its own stack, but they all share the heap: four threads, one Account. Next, a hundred of them.' },
   ],
   edges: [{ from: 'stacks', to: 'heap', label: 'all deposit into' }],
 })

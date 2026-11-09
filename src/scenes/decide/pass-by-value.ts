@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf, lastLine } from '../ide'
+import { lineOf, lastLine } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/08-pass-by-value/project/Bank.java?raw'
 import session from '../../../spine/decide/08-pass-by-value/session.txt?raw'
@@ -7,9 +8,10 @@ import session from '../../../spine/decide/08-pass-by-value/session.txt?raw'
 // §8 — pass by value (failure): chargeFee gets a COPY of main's reference, points its copy at a new
 // BigDecimal, and returns nothing — main's balance still reads 120.50 (the session).
 const at = lineOf(code, 'void chargeFee')
-export const decidePassByValue: SceneModel = ideFrame({
+export const decidePassByValue: SceneModel = ideFrame2({
+  model: 'A copy of the arrow is passed',
   tree: project('active'),
-  editor: { file: 'Bank.java', code, show: [[7, 17], [at, lastLine(code)]], highlight: [lineOf(code, 'case "fee"'), lineOf(code, 'balance = balance.subtract(fee)')] },
+  editor: { file: 'Bank.java', code, show: [[lineOf(code, 'case "withdraw"'), lineOf(code, 'default ->')], [at, lastLine(code)]], highlight: [lineOf(code, 'case "fee"'), lineOf(code, 'balance = balance.subtract(fee)')] },
   session,
   side: [
     {
@@ -31,11 +33,10 @@ export const decidePassByValue: SceneModel = ideFrame({
     {
       type: 'table', id: 'seen', title: 'Asked at the teller', tone: 'consume', columns: ['typed', 'printed'], rows: [
         ['balance', '120.50'],
-        { id: 'charged', cells: ['fee', 'charged 2.00, balance 118.50'] },
-        { id: 'after', cells: ['balance', '120.50: nothing was charged'], tone: 'consume' },
+        { id: 'charged', cells: ['fee', 'charged 2.00: 118.50'] },
+        { id: 'after', cells: ['balance', '120.50: unchanged'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'rule', tone: 'consume', text: 'Java passes a copy of every argument. For a reference, that is a copy of the arrow: pointing the copy elsewhere changes nothing for the caller.' },
   ],
   edges: [
     { from: 'fee.balance', to: 'new' },

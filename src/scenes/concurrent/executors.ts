@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/07-executors/project/labs/Interest.java?raw'
 import session from '../../../spine/concurrent/07-executors/session.txt?raw'
 
 // §7 — ExecutorService and Future: 1000 interest calculations as tasks for a pool of 4 workers;
 // each submit() returns a Future, and get() waits for its answer.
-export const concurrentExecutors: SceneModel = ideFrame({
+export const concurrentExecutors: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Interest.java', ['Counters.java', 'Interest.java', 'Tellers.java', 'Transfers.java'], ['Interest.java'], true),
   editor: { file: 'labs/Interest.java', code, highlight: linesFrom(code, 'try (ExecutorService pool', 'total = total.plus') },
   session,
@@ -26,7 +28,6 @@ export const concurrentExecutors: SceneModel = ideFrame({
       ],
     },
     { type: 'table', id: 'result', title: 'The answer', tone: 'store', columns: ['tasks', 'interest due'], rows: [['1000 × 1000.00 at 1.5%', '15000.00 EUR']] },
-    { type: 'note', id: 'why', tone: 'store', text: 'Four threads for a thousand jobs, not a thousand threads: a platform thread is expensive, so a pool reuses a few.' },
   ],
   edges: [
     { from: 'p-tasks', to: 'p-queue' },

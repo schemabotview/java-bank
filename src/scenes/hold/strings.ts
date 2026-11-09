@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/hold/05-strings/project/Bank.java?raw'
 import session from '../../../spine/hold/05-strings/session.txt?raw'
 
 // §5 — strings: indexed characters, and immutable — toUpperCase() makes a NEW String; holder still
 // reads "Ana" afterwards (the session). substring(3) is "0001".
-export const holdStrings: SceneModel = ideFrame({
+export const holdStrings: SceneModel = ideFrame2({
+  model: 'Indexed, and immutable',
   tree: project('active'),
   editor: { file: 'Bank.java', code, highlight: [lineOf(code, 'String account'), lineOf(code, '.formatted(')] },
   session,
@@ -26,13 +28,6 @@ export const holdStrings: SceneModel = ideFrame({
             { type: 'table', id: 'upper', title: 'a NEW String', tone: 'store', rows: [['"ANA"']] },
           ],
         },
-      ],
-    },
-    {
-      type: 'table', id: 'methods', title: 'Asked of a String', tone: 'ingest', columns: ['call', 'gives back'], rows: [
-        ['holder.toUpperCase()', '"ANA", a new String'],
-        ['holder, afterwards', '"Ana": unchanged'],
-        ['"%s, account %s".formatted(…)', 'each %s filled in order'],
       ],
     },
   ],

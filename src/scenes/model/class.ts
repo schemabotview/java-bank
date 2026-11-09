@@ -1,12 +1,13 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame } from '../ide'
+import { ideFrame2 } from '../frame'
 import { files } from './tree'
 import code from '../../../spine/model/01-class/project/Account.java?raw'
 import session from '../../../spine/model/01-class/session.txt?raw'
 
 // §1 — a class: Account is a blueprint; `new Account()` makes objects, each with its own fields.
 // Ben's -420.00 is the session's: nothing yet stops a direct write.
-export const modelClass: SceneModel = ideFrame({
+export const modelClass: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'Bank.java'], 'Account.java', ['Account.java']),
   editor: { file: 'Account.java', code },
   session,
@@ -30,7 +31,6 @@ export const modelClass: SceneModel = ideFrame({
         ['method', 'code that works on its own object'],
       ],
     },
-    { type: 'note', id: 'open', tone: 'consume', text: 'ben.balance = … writes straight into the object. Nothing stops a balance of -420.00.' },
   ],
   edges: [
     { from: 'cls', to: 'heap', label: 'new, twice' },

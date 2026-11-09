@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/06-lock-ordering/project/src/main/java/ledger/TransferService.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/concurrent/06-lock-ordering/session.txt?raw'
 
 // §6 — lock ordering: both threads take the lower account number's lock first, so neither can hold
 // what the other waits for; the same 400000 transfers finish, the total unchanged (the session).
-export const concurrentLockOrdering: SceneModel = ideFrame({
+export const concurrentLockOrdering: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('TransferService.java', ['Counters.java', 'Tellers.java', 'Transfers.java'], [], true),
   editor: { file: 'src/main/java/ledger/TransferService.java', code, ...view(code, 'public class TransferService', undefined, 0), highlight: linesFrom(code, 'boolean fromFirst', 'synchronized (second)') },
   session,

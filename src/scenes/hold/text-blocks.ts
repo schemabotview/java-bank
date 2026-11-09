@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { project } from '../start/tree'
 import code from '../../../spine/hold/07-text-blocks/project/Bank.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/hold/07-text-blocks/session.txt?raw'
 
 // §7 — a text block: the statement header as one literal. The compiler strips the common indent and
 // keeps the line breaks; the closing """ on the last line means no trailing newline.
-export const holdTextBlocks: SceneModel = ideFrame({
+export const holdTextBlocks: SceneModel = ideFrame2({
+  model: 'A text block, written as it prints',
   tree: project('active'),
   editor: { file: 'Bank.java', code, ...view(code, 'void main'), highlight: linesFrom(code, 'String header', '.formatted(bank') },
   session,
@@ -22,11 +24,11 @@ export const holdTextBlocks: SceneModel = ideFrame({
     {
       type: 'table', id: 'lines', title: 'The header, line by line', tone: 'store', columns: ['in the source', 'printed'], rows: [
         ['%s', 'Syndica Bank'],
-        ['Statement for %s, account %s', 'Statement for Ana, account SB-0001'],
-        ['----------------------------"""', 'the rule; no newline after it'],
+        ['Statement for %s,', 'Statement for Ana,'],
+        ['  account %s', '  account SB-0001'],
+        ['---…"""', 'the rule, no newline'],
       ],
     },
-    { type: 'note', id: 'why', tone: 'ingest', text: 'Before text blocks, this was three strings joined with "\\n" and +. A text block is written the way it prints.' },
   ],
   edges: [
     { from: 'f-block', to: 'f-strip' },

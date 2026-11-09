@@ -46,13 +46,13 @@ export const TERMINAL_ROWS = Math.floor((TERMINAL_H - CHROME) / ROW)
 export const trim = (text: string) => text.replace(/\n+$/, '')
 
 /** Expand tabs to the next multiple of 8 columns, as a terminal does (a stack trace's `\tat`). */
-const untab = (line: string) => line.replace(/[^\t]*\t/g, (run) => run.slice(0, -1).padEnd((Math.floor((run.length - 1) / 8) + 1) * 8))
+export const untab = (line: string) => line.replace(/[^\t]*\t/g, (run) => run.slice(0, -1).padEnd((Math.floor((run.length - 1) / 8) + 1) * 8))
 
 /** A line the learner typed: a shell command, a jshell snippet or its continuation, the teller's prompt. */
-const PROMPT = /^(\$ |jshell> |   \.\.\.> |teller> )/
+export const PROMPT = /^(\$ |jshell> |   \.\.\.> |teller> )/
 
 /** Where an error report starts; it runs to the next prompt, since Java prints nothing after one. */
-const ERROR_START = [
+export const ERROR_START = [
   /^\S+\.java:\d+: error: /, // javac, or the source launcher compiling Bank.java
   /^error: /, // the launcher's own error (`error: compilation failed`, a missing main)
   /^Exception in thread "/, // an uncaught exception: the stack trace follows

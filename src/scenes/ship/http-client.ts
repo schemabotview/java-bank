@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { shipTree } from './tree'
 import code from '../../../spine/ship/03-http-client/project/labs/Client.java?raw'
@@ -9,7 +10,8 @@ import session from '../../../spine/ship/03-http-client/session.txt?raw'
 // key on virtual threads: Ana's balance falls by exactly 1.00 (both GETs are the session's).
 const balances = [...session.matchAll(/"balance": "([^"]+)"/g)].map(([, b]) => b)
 
-export const shipHttpClient: SceneModel = ideFrame({
+export const shipHttpClient: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: shipTree('Client.java', ['Client.java'], ['Client.java', 'Counters.java', 'Interest.java', 'Maps.java', 'Payments.java', 'Tellers.java', 'Transfers.java']),
   editor: { file: 'labs/Client.java', code, ...view(code, 'void main()', 'String get('), highlight: [lineOf(code, 'pool.submit('), lineOf(code, 'pool.submit(', lineOf(code, 'pool.submit(') + 1)] },
   session,
@@ -35,7 +37,6 @@ export const shipHttpClient: SceneModel = ideFrame({
         ['pay-99', 'pays 0.01', 'the stored reply'],
       ],
     },
-    { type: 'note', id: 'end', tone: 'store', text: 'Every layer of the course at once: virtual threads send, the server takes them on virtual threads, keys stop double payments, and the locks keep every cent.' },
   ],
   edges: [
     { from: 'c-req', to: 'c-send' },

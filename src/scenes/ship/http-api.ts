@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { shipTree } from './tree'
 import code from '../../../spine/ship/01-http-api/project/src/main/java/ledger/Server.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/ship/01-http-api/session.txt?raw'
 
 // §1 — an HTTP API on the JDK's own server (module jdk.httpserver), one virtual thread per request.
 // Every response is the session's curl output.
-export const shipHttpApi: SceneModel = ideFrame({
+export const shipHttpApi: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: shipTree('Server.java', ['Server.java', 'serve']),
   editor: { file: 'src/main/java/ledger/Server.java', code, ...view(code, 'void main()', 'static String json', 0), highlight: linesFrom(code, 'HttpServer http = HttpServer.create', 'http.start()') },
   session,
@@ -26,7 +28,6 @@ export const shipHttpApi: SceneModel = ideFrame({
         { id: 'post', cells: ['POST /transfers', 'paid, or 409 declined'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'journal', tone: 'store', text: "Every transfer is two journal lines. The journal now flushes each line: a server is stopped, not closed, and 8.3's buffer would be lost." },
   ],
   edges: [
     { from: 'f-curl', to: 'f-server' },

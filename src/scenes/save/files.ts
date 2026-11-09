@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { outputOf } from '../lab'
 import { saveTree } from './tree'
@@ -10,7 +11,8 @@ import session from '../../../spine/save/01-files/session.txt?raw'
 // everything twice (6 lines): the bank writes, but does not yet read back.
 const lines = outputOf(session, 'cat data/journal.csv').split('\n')
 
-export const saveFiles: SceneModel = ideFrame({
+export const saveFiles: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: saveTree('Journal.java', ['Journal.java', 'journal.csv']),
   editor: { file: 'Journal.java', code, ...view(code, '// The bank', 'List<Entry> readAll', 0), highlight: linesFrom(code, 'void append', 'StandardOpenOption.CREATE') },
   session,
@@ -32,7 +34,6 @@ export const saveFiles: SceneModel = ideFrame({
         ['Files.writeString(…, APPEND)', 'opens, adds a line, closes'],
       ],
     },
-    { type: 'note', id: 'twice', tone: 'consume', text: 'The second run posted the opening day again: 6 lines. The bank remembers on disk, but forgets on start.' },
   ],
   edges: [
     { from: 'f-apply', to: 'f-ledger' },

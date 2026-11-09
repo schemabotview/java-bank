@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -8,7 +9,8 @@ import session from '../../../spine/stream/06-loop-or-stream/session.txt?raw'
 
 // §6 — when a loop reads better: a running balance carries state from line to line, so it is a
 // loop; a total over the whole ledger is a question about the list, so it is a stream.
-export const streamLoopOrStream: SceneModel = ideFrame({
+export const streamLoopOrStream: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, '// A running balance', 'Money signed', 0), highlight: linesFrom(code, 'Money running', 'running = running.plus') },
   session,
@@ -29,6 +31,5 @@ export const streamLoopOrStream: SceneModel = ideFrame({
         ['filter, then transform, then total', 'a stream'],
       ],
     },
-    { type: 'note', id: 'rule', tone: 'store', text: "A stream says WHAT is wanted; a loop says HOW, step by step. Use whichever the next reader will understand first." },
   ],
 })

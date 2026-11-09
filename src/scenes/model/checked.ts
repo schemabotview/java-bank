@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { outputOf } from '../lab'
 import { files } from './tree'
 import code from '../../../spine/model/10-checked/project/Bank.java?raw'
@@ -10,7 +11,8 @@ import unreported from '../../../spine/model/10b-unreported/session.txt?raw'
 // withdraw() must catch it or declare it; the 10b lab drops main's try and the compiler refuses.
 const refusal = outputOf(unreported, 'java Bank.java').split('\n')[0].replace(/^Bank\.java:\d+: error: /, '')
 
-export const modelChecked: SceneModel = ideFrame({
+export const modelChecked: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java', 'InsufficientFundsException.java', 'InterestPolicy.java', 'Money.java', 'Promotion.java', 'Transaction.java'], 'Bank.java', ['InsufficientFundsException.java']),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'try {', 'declined') },
   session,
@@ -44,6 +46,5 @@ export const modelChecked: SceneModel = ideFrame({
         ['Deposit 25.10', 'done: 105.60'],
       ],
     },
-    { type: 'note', id: 'refused', tone: 'consume', text: `Without the try, main does not compile: ${refusal}.` },
   ],
 })

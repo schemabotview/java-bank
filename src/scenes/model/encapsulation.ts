@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from './tree'
 import code from '../../../spine/model/02-encapsulation/project/Account.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/model/02-encapsulation/session.txt?raw'
 
 // §2 — encapsulation: private fields, a constructor to fill them, and methods as the only way in.
 // main's direct write no longer compiles (the session's two errors).
-export const modelEncapsulation: SceneModel = ideFrame({
+export const modelEncapsulation: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'Bank.java'], 'Account.java'),
   editor: { file: 'Account.java', code, ...view(code, 'class Account', undefined, 0), highlight: [lineOf(code, 'private String holder'), lineOf(code, 'private BigDecimal balance')] },
   session,
@@ -32,7 +34,6 @@ export const modelEncapsulation: SceneModel = ideFrame({
         ['balance()', 'the balance: a BigDecimal, which cannot be changed'],
       ],
     },
-    { type: 'note', id: 'refused', tone: 'consume', text: 'ben.balance = … now fails to compile: balance has private access in Account. withdraw() refuses too much, and nothing else can touch the balance.' },
   ],
   edges: [
     { from: 'outside', to: 'methods' },

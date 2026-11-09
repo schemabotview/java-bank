@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf, lastLine } from '../ide'
+import { lineOf, lastLine } from '../ide'
+import { ideFrame2 } from '../frame'
 import { outputOf } from '../lab'
 import { saveTree } from './tree'
 import code from '../../../spine/save/03-try-with-resources/project/Journal.java?raw'
@@ -11,7 +12,8 @@ import unclosed from '../../../spine/save/03b-unclosed/session.txt?raw'
 const lost = outputOf(unclosed, 'wc -l data/journal.csv')
 const kept = outputOf(session, 'wc -l data/journal.csv')
 
-export const saveTryWithResources: SceneModel = ideFrame({
+export const saveTryWithResources: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: saveTree('Journal.java'),
   editor: { file: 'Journal.java', code, show: [[lineOf(code, '// One writer'), lineOf(code, 'out.newLine') + 1], [lineOf(code, '@Override'), lastLine(code)]], highlight: [lineOf(code, 'implements AutoCloseable'), lineOf(code, 'Files.newBufferedWriter'), lineOf(code, 'out.close()')] },
   session,
@@ -35,7 +37,6 @@ export const saveTryWithResources: SceneModel = ideFrame({
         { id: 'buffered', cells: ['BufferedWriter', 'a copy into memory'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'always', tone: 'store', text: 'try (…) calls close() when the block ends, however it ends: normally, by return, or by an exception.' },
   ],
   edges: [
     { from: 'b-write', to: 'b-buf' },

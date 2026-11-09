@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { COLLECT } from './files'
@@ -8,7 +9,8 @@ import session from '../../../spine/collect/03-set/session.txt?raw'
 
 // §3 — a Set: flagged accounts. add() answers whether it was new (the second SB-0002 is false);
 // contains() is one bucket away, not a walk through every element.
-export const collectSet: SceneModel = ideFrame({
+export const collectSet: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(COLLECT, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'Set<String> flagged', 'SB-0001 flagged', 0), highlight: linesFrom(code, 'flag SB-0002', 'SB-0001 flagged') },
   session,
@@ -26,6 +28,5 @@ export const collectSet: SceneModel = ideFrame({
         { id: 'hashset', cells: ['HashSet', 'one bucket', 'about one'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'order', tone: 'ingest', text: 'A HashSet keeps no order: SB-0003 printed first. A TreeSet keeps its elements sorted, at a small cost on every add.' },
   ],
 })

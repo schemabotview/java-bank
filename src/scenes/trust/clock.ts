@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { buildTree, MODEL } from '../build/tree'
 import code from '../../../spine/trust/04-clock/project/src/test/java/ledger/model/BankCalendarTest.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/trust/04-clock/session.txt?raw'
 
 // §4 — testing time: BankCalendar reads a Clock; tests stop the clock at chosen instants, one of them
 // an hour that is still October in Berlin and another that is already November.
-export const trustClock: SceneModel = ideFrame({
+export const trustClock: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'BankCalendarTest.java', fresh: ['BankCalendar.java', 'BankCalendarTest.java'], pom: true, output: 'target', tests: ['AccountTest.java', 'BankCalendarTest.java', 'MoneyTest.java'], model: [...MODEL, 'BankCalendar.java'] }),
   editor: { file: 'src/test/java/ledger/model/BankCalendarTest.java', code, ...view(code, 'class BankCalendarTest', 'calendar.today()', 0), highlight: linesFrom(code, 'static BankCalendar at', 'Clock.fixed') },
   session,
@@ -31,7 +33,6 @@ export const trustClock: SceneModel = ideFrame({
         ['2028-02-29T12:00Z', '29 Feb 2028', 'yes'],
       ],
     },
-    { type: 'note', id: 'why', tone: 'ingest', text: 'Code that calls LocalDate.now() can only be tested on the right day. Code that reads a Clock can be tested on any day, every time.' },
   ],
   edges: [{ from: 'cal', to: 'which' }],
 })

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf, linesFrom } from '../ide'
+import { lineOf, linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -8,7 +9,8 @@ import session from '../../../spine/stream/02-method-refs/session.txt?raw'
 
 // §2 — method references: Entry::account names a method instead of wrapping it in a lambda; a
 // Comparator built from two of them sorts by account, then day (the session).
-export const streamMethodRefs: SceneModel = ideFrame({
+export const streamMethodRefs: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'ledger.sort(', 'Account open', 0), highlight: [lineOf(code, 'ledger.sort('), ...linesFrom(code, 'Function<Entry, Money>', 'Transaction::amount')] },
   session,
@@ -27,7 +29,6 @@ export const streamMethodRefs: SceneModel = ideFrame({
         { type: 'item', id: 'c-day', title: '2. .thenComparing(Entry::on)', sub: 'the day, within an account', icon: 'clock' },
       ],
     },
-    { type: 'note', id: 'natural', tone: 'ingest', text: "Entry's natural order is still by day. A Comparator is another order, chosen at the call, without touching the class." },
   ],
   edges: [{ from: 'c-acct', to: 'c-day', label: 'tie?' }],
 })

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { buildTree } from './tree'
 import code from '../../../spine/build/03-maven/project/pom.xml?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/build/03-maven/session.txt?raw'
 
 // §3 — Maven: one pom.xml names the project and pins its plugins; `mvn compile` builds into
 // target/classes because the sources are already in the standard layout.
-export const buildMaven: SceneModel = ideFrame({
+export const buildMaven: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'pom.xml', fresh: ['pom.xml'], pom: true, output: 'target' }),
   editor: { file: 'pom.xml', code, lang: 'text', ...view(code, '<modelVersion>', '</properties>', 0), highlight: linesFrom(code, '<groupId>bank.syndica', '<version>1.0') },
   session,

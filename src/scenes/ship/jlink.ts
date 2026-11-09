@@ -1,5 +1,5 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame } from '../ide'
+import { ideFrame2 } from '../frame'
 import { outputOf } from '../lab'
 import { shipTree } from './tree'
 import code from '../../../spine/ship/04-jlink/project/src/main/java/module-info.java?raw'
@@ -10,7 +10,8 @@ import session from '../../../spine/ship/04-jlink/session.txt?raw'
 const modules = outputOf(session, 'runtime/bin/java --list-modules').split('\n')
 const sizes = outputOf(session, 'du -sh runtime /usr/lib/jvm/java-25-openjdk-amd64').split('\n').map((l) => l.split(/\s+/))
 
-export const shipJlink: SceneModel = ideFrame({
+export const shipJlink: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: shipTree('module-info.java', [], ['Client.java', 'Counters.java', 'Interest.java', 'Maps.java', 'Payments.java', 'Tellers.java', 'Transfers.java'], true),
   editor: { file: 'src/main/java/module-info.java', code, highlight: [3] },
   session,
@@ -23,7 +24,6 @@ export const shipJlink: SceneModel = ideFrame({
     },
     { type: 'table', id: 'mods', title: 'runtime/bin/java --list-modules', tone: 'store', columns: ['module'], rows: modules.map((m, i) => ({ id: `m${i}`, cells: [m] })) },
     { type: 'table', id: 'sizes', title: 'du -sh', tone: 'ingest', columns: ['folder', 'size'], rows: sizes.map(([size, path], i) => ({ id: `s${i}`, cells: [path.replace('/usr/lib/jvm/', ''), size], tone: i === 0 ? 'store' as const : undefined })) },
-    { type: 'note', id: 'config', tone: 'ingest', text: 'Configuration from outside: -Dledger.port=9090 moves the server, with no new build. The same jar runs on a laptop and in production.' },
   ],
   edges: [{ from: 'l-graph', to: 'l-out' }],
 })

@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/hold/01-variables/project/Bank.java?raw'
 import session from '../../../spine/hold/02-stack-and-heap/session.txt?raw'
 
 // §2 — ◆ side pane: primitives vs references. The editor is 3.1's file; the session is the lab's:
 // holder.length() works, balance.length() is refused ("double cannot be dereferenced").
-export const holdStackAndHeap: SceneModel = ideFrame({
+export const holdStackAndHeap: SceneModel = ideFrame2({
+  model: 'Primitives hold values; references point',
   tree: project('active'),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'String holder', 'double balance') },
   session,
@@ -31,12 +33,11 @@ export const holdStackAndHeap: SceneModel = ideFrame({
     },
     {
       type: 'table', id: 'kinds', title: 'Two kinds of type', tone: 'ingest', columns: ['', 'primitive', 'reference'], rows: [
-        ['the name holds', 'the value itself', 'an arrow to an object'],
-        ['for example', 'int, long, double', 'String, BigDecimal'],
-        { id: 'methods', cells: ['has methods', 'no: cannot be dereferenced', 'yes: holder.length()'], tone: 'consume' },
+        ['holds', 'the value', 'an arrow'],
+        ['e.g.', 'int, double', 'String'],
+        { id: 'methods', cells: ['methods', 'none', 'holder.length()'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'eight', tone: 'ingest', text: 'Java has eight primitive types. Every other type is a reference to an object on the heap.' },
   ],
   edges: [
     { from: 'frame.holder', to: 'ana' },

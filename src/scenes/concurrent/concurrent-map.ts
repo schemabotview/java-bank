@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/08-concurrent-map/project/labs/Maps.java?raw'
 import session from '../../../spine/concurrent/08-concurrent-map/session.txt?raw'
@@ -8,7 +9,8 @@ import session from '../../../spine/concurrent/08-concurrent-map/session.txt?raw
 // each run, read from the volatile session); ConcurrentHashMap keeps all. Bank's map is one now.
 const lost = [...session.matchAll(/^HashMap:\s+(\d+) accounts$/gm)].map(([, n]) => n)
 
-export const concurrentMap: SceneModel = ideFrame({
+export const concurrentMap: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Maps.java', ['Counters.java', 'Interest.java', 'Maps.java', 'Tellers.java', 'Transfers.java'], ['Maps.java'], true),
   editor: { file: 'labs/Maps.java', code, highlight: linesFrom(code, 'Map<String, Integer> plain', 'Map<String, Integer> concurrent') },
   session,
@@ -25,7 +27,5 @@ export const concurrentMap: SceneModel = ideFrame({
         { type: 'item', id: 'h-full', title: 'a full bucket', sub: 'locked alone, not the map', icon: 'lock' },
       ],
     },
-    { type: 'note', id: 'silent', tone: 'consume', text: 'The HashMap threw nothing: two threads wrote into the same bucket at once, and one entry overwrote the other.' },
-    { type: 'note', id: 'bank', tone: 'store', text: "Bank's accounts map is a ConcurrentHashMap now: tellers on many threads can open and find accounts at once, and none is lost." },
   ],
 })

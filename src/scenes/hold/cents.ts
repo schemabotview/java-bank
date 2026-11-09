@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/hold/03-cents/project/Bank.java?raw'
 import session from '../../../spine/hold/03-cents/session.txt?raw'
 
 // §3 — why money is not a double: 0.1 + 0.2 != 0.3 (the session), then cents in a long: exact
 // for adding, but integer division drops the 0.75 of a cent the interest is owed (180, not 180.75).
-export const holdCents: SceneModel = ideFrame({
+export const holdCents: SceneModel = ideFrame2({
+  model: 'A double is binary; cents are exact',
   tree: project('active'),
   editor: { file: 'Bank.java', code, highlight: [lineOf(code, 'long balanceCents'), lineOf(code, 'Interest in cents')] },
   session,
@@ -19,16 +21,10 @@ export const holdCents: SceneModel = ideFrame({
       ],
     },
     {
-      type: 'table', id: 'asked', title: 'Asked in jshell', tone: 'consume', columns: ['typed', 'answer'], rows: [
-        ['0.1 + 0.2', '0.30000000000000004'],
-        ['0.1 + 0.2 == 0.3', 'false'],
-      ],
-    },
-    {
       type: 'table', id: 'long', title: 'Cents in a long', tone: 'ingest', columns: ['', 'in cents', 'exact?'], rows: [
-        { cells: ['the balance', '12050', 'yes'], tone: 'store' },
-        { cells: ['adding, subtracting', 'whole numbers', 'yes'], tone: 'store' },
-        { id: 'interest', cells: ['12050 × 15 / 1000', '180', 'no: 180.75'], tone: 'consume' },
+        { cells: ['balance', '12050', 'yes'], tone: 'store' },
+        { cells: ['+ and −', 'whole', 'yes'], tone: 'store' },
+        { id: 'interest', cells: ['× 15 / 1000', '180', 'no: 180.75'], tone: 'consume' },
       ],
     },
   ],

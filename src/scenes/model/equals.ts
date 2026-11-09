@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { files } from './tree'
 import code from '../../../spine/model/07-equals/project/Bank.java?raw'
 import session from '../../../spine/model/07-equals/session.txt?raw'
 
 // §7 — equals and hashCode: an Account is an ENTITY (equal only to itself), Money a VALUE (equal by
 // what it holds). jshell's Key vs RKey: a class without equals counts one key twice in a HashSet.
-export const modelEquals: SceneModel = ideFrame({
+export const modelEquals: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java', 'Money.java'], 'Bank.java'),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'Set<Money> amounts', 'distinct amounts') },
   session,
@@ -30,7 +32,6 @@ export const modelEquals: SceneModel = ideFrame({
         { type: 'item', id: 'h-eq', title: 'equals()', sub: 'checks inside it', icon: 'check' },
       ],
     },
-    { type: 'note', id: 'contract', tone: 'consume', text: 'Override equals and you must override hashCode, so equal objects land in the same bucket. A record writes both.' },
   ],
   edges: [{ from: 'h-code', to: 'h-eq' }],
 })

@@ -1,12 +1,13 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame } from '../ide'
+import { ideFrame2 } from '../frame'
 import { files } from './tree'
 import code from '../../../spine/model/05-enums/project/AccountType.java?raw'
 import session from '../../../spine/model/05-enums/session.txt?raw'
 
 // §5 — enums: AccountType's two constants are its only instances, each with its terms; a switch over
 // it needs no default; valueOf("PREMIUM") throws (the session).
-export const modelEnums: SceneModel = ideFrame({
+export const modelEnums: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java'], 'AccountType.java', ['AccountType.java']),
   editor: { file: 'AccountType.java', code, highlight: [5, 6] },
   session,
@@ -24,6 +25,5 @@ export const modelEnums: SceneModel = ideFrame({
         { id: 'premium', cells: ['valueOf("PREMIUM")', 'IllegalArgumentException'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'vs-string', tone: 'store', text: 'A String type could be "savngs" and nobody would know. An AccountType can only be one of these two.' },
   ],
 })

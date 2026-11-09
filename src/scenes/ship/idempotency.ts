@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf, linesFrom } from '../ide'
+import { lineOf, linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { shipTree } from './tree'
 import code from '../../../spine/ship/02-idempotency/project/src/main/java/ledger/Server.java?raw'
 import session from '../../../spine/ship/02-idempotency/session.txt?raw'
@@ -8,7 +9,8 @@ import session from '../../../spine/ship/02-idempotency/session.txt?raw'
 // once and both replies match. Ana's balances are the session's.
 const after = [...session.matchAll(/"SB-0001": "([^"]+)"/g)].map(([, b]) => b)
 
-export const shipIdempotency: SceneModel = ideFrame({
+export const shipIdempotency: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: shipTree('Server.java'),
   editor: { file: 'src/main/java/ledger/Server.java', code, show: [[lineOf(code, '// Idempotency-Key'), lineOf(code, 'final Map<String, Reply> done')], [lineOf(code, 'void transfer('), lineOf(code, 'send(ex, reply)') + 1]], highlight: linesFrom(code, 'String key = ex.getRequestHeaders()', 'done.computeIfAbsent') },
   session,
@@ -27,7 +29,6 @@ export const shipIdempotency: SceneModel = ideFrame({
         { type: 'item', id: 'k-seen', title: 'a key seen before', sub: 'the stored reply, no payment', icon: 'shield', tone: 'store' },
       ],
     },
-    { type: 'note', id: 'why', tone: 'consume', text: 'A network can lose the reply after the money moved. The client cannot know, so it retries. Without a key, every retry is another payment.' },
   ],
   edges: [{ from: 'k-new', to: 'k-seen', label: 'then' }],
 })

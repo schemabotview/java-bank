@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -7,7 +8,8 @@ import code from '../../../spine/stream/01-lambdas/project/Bank.java?raw'
 import session from '../../../spine/stream/01-lambdas/session.txt?raw'
 
 // §1 — lambdas: a review rule as a Predicate<Entry>, written as a lambda; two rules combined with or().
-export const streamLambdas: SceneModel = ideFrame({
+export const streamLambdas: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, '// A review rule', 'Account open', 0), highlight: linesFrom(code, 'Predicate<Entry> large', 'Predicate<Entry> isBen') },
   session,

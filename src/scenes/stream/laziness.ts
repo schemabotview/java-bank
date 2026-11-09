@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -8,7 +9,8 @@ import session from '../../../spine/stream/05-laziness/session.txt?raw'
 
 // §5 — laziness: building the stream runs nothing; anyMatch pulls entries one at a time and stops
 // at the first match, the 5th — the last two are never looked at (the session's peek lines).
-export const streamLaziness: SceneModel = ideFrame({
+export const streamLaziness: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'Predicate<Entry> large', 'Account open', 0), highlight: linesFrom(code, 'Stream<Entry> checked', 'checked.anyMatch') },
   session,
@@ -30,7 +32,6 @@ export const streamLaziness: SceneModel = ideFrame({
         { type: 'item', id: 't-end', title: 'anyMatch, reduce, count', sub: 'pull the elements through', icon: 'zap', tone: 'store' },
       ],
     },
-    { type: 'note', id: 'first', tone: 'store', text: '"built the stream; nothing checked yet" printed BEFORE any checking line: peek only ran when anyMatch asked for an entry.' },
   ],
   edges: [{ from: 't-mid', to: 't-end', label: 'waits for' }],
 })

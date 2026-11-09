@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from './tree'
 import code from '../../../spine/start/06-runtime-exception/project/Bank.java?raw'
 import session from '../../../spine/start/06-runtime-exception/session.txt?raw'
 
 // §6 — a runtime exception: the file compiles (120 / 0 is legal Java), runs lines 4–6, and fails at
 // line 7, so line 8 never prints. The stack trace's two lines are the session's.
-export const startRuntimeException: SceneModel = ideFrame({
+export const startRuntimeException: SceneModel = ideFrame2({
+  model: 'An exception stops a running program',
   tree: project('active'),
   editor: { file: 'Bank.java', code, highlight: [lineOf(code, '120 / 0')] },
   session,
@@ -27,14 +29,14 @@ export const startRuntimeException: SceneModel = ideFrame({
     },
     {
       type: 'table', id: 'two', title: 'Two kinds of mistake', tone: 'ingest', columns: ['', 'compile error', 'exception'], rows: [
-        ['found by', 'javac', 'the running JVM'],
-        ['found when', 'before main() starts', 'at the bad line'],
-        ['earlier lines', 'never ran', 'already ran'],
+        ['found by', 'javac', 'the JVM'],
+        ['found', 'before main()', 'at the line'],
+        ['lines before', 'never ran', 'already ran'],
       ],
     },
-    { type: 'note', id: 'not-the-end', tone: 'consume', text: 'An uncaught exception ends the program. Course 4 catches them with try and catch, and decides what happens next.' },
   ],
   edges: [
+    { from: 'ran', to: 'trace' },
     { from: 's-thread', to: 's-type' },
     { from: 's-type', to: 's-at' },
   ],

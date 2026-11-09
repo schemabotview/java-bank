@@ -1,5 +1,5 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame } from '../ide'
+import { ideFrame2 } from '../frame'
 import { outputOf } from '../lab'
 import { buildTree } from './tree'
 import code from '../../../spine/build/06-modules/project/src/main/java/module-info.java?raw'
@@ -9,7 +9,8 @@ import session from '../../../spine/build/06-modules/session.txt?raw'
 // module, invisible to every other module. The description is jar's own (the session).
 const described = outputOf(session, 'jar --describe-module --file target/ledger-1.0.jar').split('\n').slice(1).map((l) => l.split(' '))
 
-export const buildModules: SceneModel = ideFrame({
+export const buildModules: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'module-info.java', fresh: ['module-info.java'], pom: true, output: 'target', module: true }),
   editor: { file: 'src/main/java/module-info.java', code, highlight: [3] },
   session,

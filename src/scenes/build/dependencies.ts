@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { buildTree } from './tree'
 import code from '../../../spine/build/04-dependencies/project/pom.xml?raw'
@@ -12,7 +13,8 @@ const tree = session.split('\n').filter((l) => /:jar:/.test(l)).map((l) => {
   return { depth: (l.match(/^[\s|+\\-]*/)?.[0].length ?? 0) / 3, group, artifact, version }
 })
 
-export const buildDependencies: SceneModel = ideFrame({
+export const buildDependencies: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'pom.xml', pom: true, output: 'target' }),
   editor: { file: 'pom.xml', code, lang: 'text', ...view(code, '<dependencies>', '</dependencies>', 0), highlight: linesFrom(code, '<dependency>', '</dependency>') },
   session,
@@ -34,7 +36,6 @@ export const buildDependencies: SceneModel = ideFrame({
         { id: 'test', cells: ['test', 'the tests only'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'scope', tone: 'store', text: '<scope>test</scope>: JUnit is on the classpath for the tests only. It never ships inside the bank.' },
   ],
   edges: [{ from: 'f-central', to: 'f-local' }],
 })

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { saveTree } from './tree'
 import code from '../../../spine/save/05-java-time/project/Bank.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/save/05-java-time/session.txt?raw'
 
 // §5 — java.time: interest booked on YearMonth.atEndOfMonth(); a calendar day (LocalDate) is not a
 // point in time (Instant). jshell's answers are the session's.
-export const saveJavaTime: SceneModel = ideFrame({
+export const saveJavaTime: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: saveTree('Bank.java', [], true),
   editor: { file: 'Bank.java', code, ...view(code, '// Interest is paid', undefined, 0), highlight: linesFrom(code, 'void payInterest', 'LocalDate day') },
   session,
@@ -26,6 +28,5 @@ export const saveJavaTime: SceneModel = ideFrame({
         { id: 'clamp', cells: ['31 January .plusMonths(1)', '2026-02-28: clamped'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'never', tone: 'store', text: 'Never compute a month end by hand. Months have 28 to 31 days, and java.time knows every one of them.' },
   ],
 })

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { buildTree } from '../build/tree'
 import code from '../../../spine/trust/03-parameterized/project/src/test/java/ledger/model/MoneyTest.java?raw'
@@ -10,7 +11,8 @@ import session from '../../../spine/trust/03-parameterized/session.txt?raw'
 const rows = [...code.matchAll(/^\s+"([\d.]+), ([\d.]+), ([\d.]+)",(?:\s+\/\/ (.*))?$/gm)].map(([, b, r, p, note], i) =>
   ({ id: `c${i}`, cells: [b, r, p, note ? note.replace(/: .*/, '') : ''], tone: note ? 'store' as const : undefined }))
 
-export const trustParameterized: SceneModel = ideFrame({
+export const trustParameterized: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'MoneyTest.java', fresh: ['MoneyTest.java'], pom: true, output: 'target', tests: ['AccountTest.java', 'MoneyTest.java'] }),
   editor: { file: 'src/test/java/ledger/model/MoneyTest.java', code, ...view(code, 'class MoneyTest', undefined, 0), highlight: linesFrom(code, '@ParameterizedTest', '})') },
   session,
@@ -23,7 +25,6 @@ export const trustParameterized: SceneModel = ideFrame({
         { type: 'item', id: 'h-run', title: 'one test run', sub: '5 rows: Tests run: 5', icon: 'check', tone: 'store' },
       ],
     },
-    { type: 'note', id: 'ties', tone: 'store', text: 'The three ties are the point: 0.015, 0.025 and 0.035 each round to the EVEN cent. A rule in a comment is a hope; a rule in a test is a fact.' },
   ],
   edges: [
     { from: 'h-row', to: 'h-args' },

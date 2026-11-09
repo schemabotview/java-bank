@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { saveTree } from './tree'
 import code from '../../../spine/save/04-import/project/StatementImport.java?raw'
@@ -14,7 +15,8 @@ const rows = csv.trim().split('\n').slice(1).map((row, i) => {
   return { id: `r${i + 2}`, cells: [row.split(',')[0], row.split(',').slice(3).join(','), why ?? 'accepted'], tone: why ? 'consume' as const : 'store' as const }
 })
 
-export const saveImport: SceneModel = ideFrame({
+export const saveImport: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: saveTree('StatementImport.java', ['StatementImport.java', 'statement-2026-10.csv'], true),
   editor: { file: 'StatementImport.java', code, ...view(code, 'private static Entry parse', 'LocalDate.parse', 0), highlight: linesFrom(code, 'if (f.length != 5)', 'not positive') },
   session,
@@ -28,7 +30,6 @@ export const saveImport: SceneModel = ideFrame({
         { type: 'item', id: 'c-amt', title: 'a positive amount', icon: 'card' },
       ],
     },
-    { type: 'note', id: 'why', tone: 'store', text: 'A bad row is reported with its row number and reason, and the rest still import. One comma in "12,50" must not stop a whole statement.' },
   ],
   edges: [
     { from: 'c-shape', to: 'c-id' },

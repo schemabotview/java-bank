@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/02-race/project/labs/Tellers.java?raw'
 import session from '../../../spine/concurrent/02-race/session.txt?raw'
@@ -8,7 +9,8 @@ import session from '../../../spine/concurrent/02-race/session.txt?raw'
 // different amount (a volatile step: the balances are read from the session, never typed).
 const balances = [...session.matchAll(/^balance\s+(.*)$/gm)].map(([, b]) => b)
 
-export const concurrentRace: SceneModel = ideFrame({
+export const concurrentRace: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Tellers.java', ['Tellers.java']),
   editor: { file: 'labs/Tellers.java', code, highlight: linesFrom(code, 'for (int n = 0', 'ana.deposit') },
   session,
@@ -25,6 +27,5 @@ export const concurrentRace: SceneModel = ideFrame({
       type: 'table', id: 'runs', title: 'Two runs of the same program', tone: 'consume', columns: ['run', 'expected', 'balance'], rows:
         balances.map((b, i) => ({ id: `r${i}`, cells: [`${i + 1}`, '1000.00 EUR', b], tone: 'consume' as const })),
     },
-    { type: 'note', id: 'why', tone: 'consume', text: 'Read, add, write is three steps, and another thread can run between any two. No error, no exception: the money is just gone, a different amount each time.' },
   ],
 })

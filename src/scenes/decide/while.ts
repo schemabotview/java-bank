@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/06-while/project/Bank.java?raw'
 import session from '../../../spine/decide/06-while/session.txt?raw'
 
 // §6 — while and IO.readln: the teller loop. It runs until `quit` breaks out; withdraw is not a
 // command yet, so it falls to the last else (the session).
-export const decideWhile: SceneModel = ideFrame({
+export const decideWhile: SceneModel = ideFrame2({
+  model: 'Loop until quit; branch on each line',
   tree: project('active'),
   editor: { file: 'Bank.java', code, highlight: linesFrom(code, 'while (true)', 'unknown command') },
   session,
@@ -19,14 +21,13 @@ export const decideWhile: SceneModel = ideFrame({
       ],
     },
     {
-      type: 'table', id: 'commands', title: 'Typed at teller>', tone: 'ingest', columns: ['typed', 'branch', 'printed'], rows: [
-        ['balance', 'equals("balance")', 'balance: 120.50'],
-        { id: 'dep', cells: ['deposit 25.10', 'startsWith("deposit ")', 'balance: 145.60'], tone: 'store' },
-        { id: 'wd', cells: ['withdraw 10', 'else', 'unknown command'], tone: 'consume' },
-        ['quit', 'equals("quit")', 'teller closed'],
+      type: 'table', id: 'commands', title: 'Typed at teller>', tone: 'ingest', columns: ['typed', 'branch'], rows: [
+        ['balance', 'equals("balance")'],
+        { id: 'dep', cells: ['deposit 25.10', 'startsWith("deposit ")'], tone: 'store' },
+        { id: 'wd', cells: ['withdraw 10', 'else'], tone: 'consume' },
+        ['quit', 'equals("quit")'],
       ],
     },
-    { type: 'note', id: 'withdraw', tone: 'consume', text: 'withdraw is not a command yet, so it falls through to the last else. Each new command means another else if: the next section tidies that up.' },
   ],
   edges: [
     { from: 'l-read', to: 'l-match' },

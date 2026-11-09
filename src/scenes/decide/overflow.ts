@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/02-overflow/project/Bank.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/decide/02-overflow/session.txt?raw'
 
 // §2 — integer overflow: 3,000,000,000 cents does not fit in an int's 32 bits, so it wraps to a
 // negative number silently; a long holds it; Math.addExact refuses (the session).
-export const decideOverflow: SceneModel = ideFrame({
+export const decideOverflow: SceneModel = ideFrame2({
+  model: 'An int wraps around at its limit',
   tree: project('active'),
   editor: { file: 'Bank.java', code, ...view(code, 'void main'), highlight: linesFrom(code, 'int deposit', 'as a long') },
   session,
@@ -26,7 +28,6 @@ export const decideOverflow: SceneModel = ideFrame({
         { id: 'exact', cells: ['Math.addExact', 'ArithmeticException'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'rule', tone: 'consume', text: 'An int counts to about 21 million euros in cents. A long reaches 92 quadrillion: count money in long, or in BigDecimal.' },
   ],
   edges: [
     { from: 'w-max', to: 'w-plus' },

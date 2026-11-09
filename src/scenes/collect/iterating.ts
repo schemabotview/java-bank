@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { COLLECT } from './files'
@@ -8,7 +9,8 @@ import session from '../../../spine/collect/04-iterating/session.txt?raw'
 
 // §4 — iterating safely: removing from the map inside a for-each throws
 // ConcurrentModificationException (caught here only to show it); the iterator's own remove() works.
-export const collectIterating: SceneModel = ideFrame({
+export const collectIterating: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(COLLECT, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'open("Dee"', 'accounts.keySet())', 0), highlight: [...linesFrom(code, 'for (Account a', 'accounts.remove'), ...linesFrom(code, 'Iterator<Account> it', 'it.remove()')] },
   session,
@@ -26,7 +28,6 @@ export const collectIterating: SceneModel = ideFrame({
         { id: 'it', cells: ['it.remove() on the iterator', 'yes: they stay in step'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'concurrent', tone: 'ingest', text: 'Concurrent here means "while iterating", not threads. With threads, Course 11 needs a different map altogether.' },
   ],
   edges: [
     { from: 'b-it', to: 'b-rm' },

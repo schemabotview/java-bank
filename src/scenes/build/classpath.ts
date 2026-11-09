@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { buildTree } from './tree'
 import code from '../../../spine/build/01-packages/project/src/main/java/ledger/Bank.java?raw'
@@ -8,7 +9,8 @@ import session from '../../../spine/build/02-classpath/session.txt?raw'
 // §2 — the classpath ◆ side pane: class loading. Without -cp the launcher cannot find ledger.Bank
 // (ClassNotFoundException); with Money.class deleted after compiling, Account loads but cannot
 // link to Money (NoClassDefFoundError) — the 02 lab.
-export const buildClasspath: SceneModel = ideFrame({
+export const buildClasspath: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'Bank.java', output: 'out' }),
   editor: { file: 'src/main/java/ledger/Bank.java', code, ...view(code, 'package ledger', 'class Bank {', 0), highlight: [lineOf(code, 'import ledger.model.Money')] },
   session,
@@ -27,7 +29,6 @@ export const buildClasspath: SceneModel = ideFrame({
         ['means', 'the classpath is wrong', 'it compiled, then vanished'],
       ],
     },
-    { type: 'note', id: 'lazy', tone: 'ingest', text: 'Classes load the first time they are needed: Bank ran, and only new Account(…) went looking for Money.' },
   ],
   edges: [
     { from: 'l-boot', to: 'l-plat', label: 'parent of' },

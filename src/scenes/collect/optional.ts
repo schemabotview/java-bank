@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from './files'
@@ -8,7 +9,8 @@ import session from '../../../spine/collect/07-optional/session.txt?raw'
 
 // §7 — Optional: find() returns a box that holds an Account or is empty, so "not found" is in the
 // type. orElseThrow on an empty one throws NoSuchElementException (the session).
-export const collectOptional: SceneModel = ideFrame({
+export const collectOptional: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'void main', 'Optional.ofNullable', 0), highlight: linesFrom(code, 'Optional<Account> find', 'Optional.ofNullable') },
   session,
@@ -26,6 +28,5 @@ export const collectOptional: SceneModel = ideFrame({
         { id: 'oet', cells: ['orElseThrow()', 'the Account', 'NoSuchElementException'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'why', tone: 'store', text: 'A method that returns null hides "not found" in its documentation. One that returns Optional<Account> puts it in the type, where nobody can miss it.' },
   ],
 })

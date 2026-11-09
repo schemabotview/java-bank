@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -8,7 +9,8 @@ import session from '../../../spine/stream/04-grouping/session.txt?raw'
 
 // §4 — groupingBy: the ledger into months (a TreeMap, so months come in order), each month's net
 // folded; and a count per account. All figures are the session's.
-export const streamGrouping: SceneModel = ideFrame({
+export const streamGrouping: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'Map<YearMonth, List<Entry>>', 'Money signed', 0), highlight: linesFrom(code, 'Map<YearMonth, List<Entry>>', 'TreeMap::new') },
   session,
@@ -31,7 +33,6 @@ export const streamGrouping: SceneModel = ideFrame({
         ['the downstream', 'toList(), or counting()'],
       ],
     },
-    { type: 'note', id: 'count', tone: 'ingest', text: 'groupingBy(Entry::account, counting()) gives {SB-0002=3, SB-0001=4}: a HashMap, so no order is promised.' },
   ],
   edges: [{ from: 'src', to: 'months' }],
 })

@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { files } from './tree'
 import code from '../../../spine/model/08-interfaces/project/Promotion.java?raw'
 import session from '../../../spine/model/08-interfaces/session.txt?raw'
 
 // §8 — interfaces and composition: an Account HAS an InterestPolicy; AccountType and Promotion both
 // implement it, and Ben's account swaps in a Promotion without any subclass. Amounts are the session's.
-export const modelInterfaces: SceneModel = ideFrame({
+export const modelInterfaces: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(['Account.java', 'AccountType.java', 'Bank.java', 'InterestPolicy.java', 'Money.java', 'Promotion.java'], 'Promotion.java', ['InterestPolicy.java', 'Promotion.java']),
   editor: { file: 'Promotion.java', code, highlight: [lineOf(code, 'implements InterestPolicy'), lineOf(code, 'after.monthlyInterest')] },
   session,

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { COLLECT } from './files'
@@ -8,7 +9,8 @@ import session from '../../../spine/collect/01-list/session.txt?raw'
 
 // §1 — ArrayList ◆ side pane: growth. The ledger is a List that grows; the declined withdrawal never
 // reaches it (3 entries, the session). Capacity 10, then × 1.5, is OpenJDK's ArrayList.
-export const collectList: SceneModel = ideFrame({
+export const collectList: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(COLLECT, 'Bank.java', ['Entry.java']),
   editor: { file: 'Bank.java', code, ...view(code, 'List<Entry> ledger', 'void post', 0), highlight: [lineOf(code, 'List<Entry> ledger'), lineOf(code, 'ledger.add(')] },
   session,

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { outputOf } from '../lab'
 import { files } from '../model/tree'
 import { WITH_PAGE } from './files'
@@ -11,7 +12,8 @@ import wrong from '../../../spine/collect/05b-wrong-type/session.txt?raw'
 // the ledger, and the compiler refuses (its message read from the lab).
 const refusal = outputOf(wrong, 'java Bank.java').split('\n')[0].replace(/^Bank\.java:\d+: error: /, '').replace(/: inference.*/, '')
 
-export const collectGenerics: SceneModel = ideFrame({
+export const collectGenerics: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Page.java', ['Page.java']),
   editor: { file: 'Page.java', code, highlight: [lineOf(code, 'record Page<T>'), lineOf(code, 'static <T> Page<T> of')] },
   session,
@@ -33,7 +35,6 @@ export const collectGenerics: SceneModel = ideFrame({
         { id: 'wrong', cells: ['a wrong list', 'a crash, later', 'a compile error'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'refused', tone: 'consume', text: `Page<Account> list = Page.of(ledger, 2, 1) is refused: ${refusal}. At run time the T is gone (erasure): the compiler has already checked it.` },
   ],
   edges: [{ from: 'tmpl', to: 'uses' }],
 })

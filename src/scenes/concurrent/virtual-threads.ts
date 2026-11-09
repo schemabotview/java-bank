@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/09-virtual-threads/project/labs/Payments.java?raw'
@@ -9,7 +10,8 @@ import session from '../../../spine/concurrent/09-virtual-threads/session.txt?ra
 // them 200 at a time; a virtual thread per task waits all at once. Times are the volatile session's.
 const time = (label: string) => session.match(new RegExp(`^${label}:\\s+.* in about (\\d+) ms$`, 'm'))?.[1] ?? ''
 
-export const concurrentVirtualThreads: SceneModel = ideFrame({
+export const concurrentVirtualThreads: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Payments.java', ['Counters.java', 'Interest.java', 'Maps.java', 'Payments.java', 'Tellers.java', 'Transfers.java'], ['Payments.java'], true),
   editor: { file: 'labs/Payments.java', code, ...view(code, 'void main()', undefined, 0), highlight: [...linesFrom(code, 'var virtual', 'virtual threads:'), ...linesFrom(code, 'Thread.sleep(10)', 'shop.deposit')] },
   session,
@@ -33,7 +35,6 @@ export const concurrentVirtualThreads: SceneModel = ideFrame({
         { id: 'virt', cells: ['a virtual thread per payment', `about ${time('virtual threads')} ms`], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'why', tone: 'store', text: 'A virtual thread that waits gives its carrier back. Waiting is nearly free, so ten thousand can wait at once, and the code stays plain blocking code.' },
   ],
   edges: [{ from: 'vts', to: 'carriers', label: 'mounted on' }],
 })

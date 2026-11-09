@@ -1,12 +1,14 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/09-try-catch/project/Bank.java?raw'
 import session from '../../../spine/decide/09-try-catch/session.txt?raw'
 
 // §9 — try / catch: "12,50" makes new BigDecimal throw NumberFormatException; it unwinds out of
 // money(), deposit() is never called, and main's catch prints a message — the loop goes on.
-export const decideTryCatch: SceneModel = ideFrame({
+export const decideTryCatch: SceneModel = ideFrame2({
+  model: 'An exception unwinds to its catch',
   tree: project('active'),
   editor: { file: 'Bank.java', code, show: [[7, 25], [lineOf(code, 'BigDecimal money'), lineOf(code, 'BigDecimal money') + 2]], highlight: [lineOf(code, 'try {'), lineOf(code, 'catch (NumberFormatException'), lineOf(code, 'not an amount')] },
   session,
@@ -20,11 +22,10 @@ export const decideTryCatch: SceneModel = ideFrame({
     },
     {
       type: 'table', id: 'with', title: 'A bad amount', tone: 'ingest', columns: ['', 'without try', 'with try'], rows: [
-        ['the teller', 'stops, with a stack trace', 'says: not an amount'],
-        { id: 'next', cells: ['the next line', 'never read', 'read as usual'], tone: 'store' },
+        ['the teller', 'stops: a trace', 'not an amount'],
+        { id: 'next', cells: ['next line', 'never read', 'read'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'fixed', tone: 'store', text: 'chargeFee now returns the new balance, like deposit: fee then takes 2.00 for real.' },
   ],
   edges: [
     { from: 'u-throw', to: 'u-money' },

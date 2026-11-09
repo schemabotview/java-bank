@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from '../collect/files'
@@ -8,7 +9,8 @@ import session from '../../../spine/stream/03-fold/session.txt?raw'
 
 // §3 — filter / map / reduce: an account's balance, folded from the ledger, equals the balance the
 // Account kept (the session) — the balance is DERIVED from the ledger.
-export const streamFold: SceneModel = ideFrame({
+export const streamFold: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'for (Account a : List.of', 'Money signed', 0), highlight: linesFrom(code, 'Money folded = ledger.stream()', '.reduce(') },
   session,
@@ -27,7 +29,6 @@ export const streamFold: SceneModel = ideFrame({
         ['SB-0002', '244.20', '244.20'],
       ],
     },
-    { type: 'note', id: 'derived', tone: 'store', text: 'The balance is a fold of the ledger. Keep the ledger, and every balance can be worked out again: Course 8 rebuilds the bank this way after a restart.' },
   ],
   edges: [
     { from: 'p-src', to: 'p-filter' },

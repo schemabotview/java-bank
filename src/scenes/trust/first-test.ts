@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { buildTree } from '../build/tree'
 import code from '../../../spine/trust/01-first-test/project/src/test/java/ledger/model/AccountTest.java?raw'
 import session from '../../../spine/trust/01-first-test/session.txt?raw'
@@ -9,7 +10,8 @@ import failing from '../../../spine/trust/01b-failing/session.txt?raw'
 // read from it, never typed.
 const message = failing.match(/AssertionFailedError: (.*)$/m)?.[1] ?? ''
 
-export const trustFirstTest: SceneModel = ideFrame({
+export const trustFirstTest: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'AccountTest.java', fresh: ['AccountTest.java'], pom: true, output: 'target', tests: ['AccountTest.java'] }),
   editor: { file: 'src/test/java/ledger/model/AccountTest.java', code, highlight: [lineOf(code, '@Test'), lineOf(code, 'var ana'), lineOf(code, 'ana.deposit'), lineOf(code, 'assertEquals(')] },
   session,
@@ -27,7 +29,6 @@ export const trustFirstTest: SceneModel = ideFrame({
         { id: 'fail', cells: ['125.00 EUR (a lab)', 'BUILD FAILURE'], tone: 'consume' },
       ],
     },
-    { type: 'note', id: 'msg', tone: 'consume', text: `When it fails, JUnit says exactly how: ${message}. Money's toString makes that readable.` },
   ],
   edges: [
     { from: 'a-arrange', to: 'a-act' },

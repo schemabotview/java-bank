@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { outputOf } from '../lab'
 import { buildTree } from './tree'
@@ -10,7 +11,8 @@ import session from '../../../spine/build/05-jar/session.txt?raw'
 // classpath and no class name. The manifest rows are the session's.
 const manifest = outputOf(session, 'unzip -p target/ledger-1.0.jar META-INF/MANIFEST.MF').split('\n').filter(Boolean).map((l) => l.split(': '))
 
-export const buildJar: SceneModel = ideFrame({
+export const buildJar: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: buildTree({ active: 'pom.xml', pom: true, output: 'target' }),
   editor: { file: 'pom.xml', code, lang: 'text', ...view(code, '<artifactId>maven-jar-plugin', '</configuration>', 0), highlight: linesFrom(code, '<manifest>', '</manifest>') },
   session,
@@ -27,7 +29,6 @@ export const buildJar: SceneModel = ideFrame({
       ],
     },
     { type: 'table', id: 'mf', title: 'MANIFEST.MF', tone: 'ingest', columns: ['header', 'value'], rows: manifest.map(([k, v]) => ({ id: k, cells: [k, v], tone: k === 'Main-Class' ? 'store' as const : undefined })) },
-    { type: 'note', id: 'zip', tone: 'ingest', text: 'A jar is a zip file with a manifest. unzip can read it, and java -jar runs it on any machine with Java 25.' },
   ],
   edges: [{ from: 'run', to: 'inside' }],
 })

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf, lastLine } from '../ide'
+import { lineOf, lastLine } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/hold/09-null/project/Bank.java?raw'
 import session from '../../../spine/hold/09-null/session.txt?raw'
@@ -7,10 +8,10 @@ import session from '../../../spine/hold/09-null/session.txt?raw'
 // §9 — null: a field nobody assigned starts as null; printing it is fine, calling a method on it
 // throws, and the helpful message names the field (this.note). A field, not a local: the source
 // launcher compiles without local names, and would call a local "<local2>".
-const at = lineOf(code, 'BigDecimal closing')
-export const holdNull: SceneModel = ideFrame({
+export const holdNull: SceneModel = ideFrame2({
+  model: 'null: an arrow to nothing',
   tree: project('active'),
-  editor: { file: 'Bank.java', code, show: [[1, 5], [at, lastLine(code)]], highlight: [lineOf(code, 'String note;'), lineOf(code, 'note.length()')] },
+  editor: { file: 'Bank.java', code, show: [[1, 3], [lineOf(code, 'IO.println("Note: "'), lastLine(code)]], highlight: [lineOf(code, 'String note;'), lineOf(code, 'note.length()')] },
   session,
   side: [
     {
@@ -29,11 +30,10 @@ export const holdNull: SceneModel = ideFrame({
     },
     {
       type: 'table', id: 'npe', title: 'The helpful message', tone: 'consume', columns: ['it says', 'meaning'], rows: [
-        ['Cannot invoke "String.length()"', 'what was tried'],
-        ['because "this.note" is null', 'which name was empty'],
+        ['Cannot invoke "String.length()"', 'tried'],
+        ['because "this.note" is null', 'empty'],
       ],
     },
-    { type: 'note', id: 'local', tone: 'ingest', text: '"Note: " + note prints null without complaint. Only calling a method on it throws.' },
   ],
-  edges: [{ from: 'fields.note', to: 'nothing', label: 'null' }],
+  edges: [{ from: 'fields.note', to: 'nothing', label: 'null' }, { from: 'defaults', to: 'mem' }],
 })

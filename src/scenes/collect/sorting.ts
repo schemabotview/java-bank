@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { files } from '../model/tree'
 import { WITH_PAGE } from './files'
 import code from '../../../spine/collect/06-sorting/project/Entry.java?raw'
@@ -7,7 +8,8 @@ import session from '../../../spine/collect/06-sorting/session.txt?raw'
 
 // §6 — sorting: Entry is Comparable — by day, then the larger amount first. Collections.sort uses
 // that natural order; both orders are the session's.
-export const collectSorting: SceneModel = ideFrame({
+export const collectSorting: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(WITH_PAGE, 'Entry.java'),
   editor: { file: 'Entry.java', code, highlight: linesFrom(code, 'int byDay', 'return other.tx') },
   session,

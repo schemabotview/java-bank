@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { files } from '../model/tree'
 import { COLLECT } from './files'
@@ -10,7 +11,8 @@ import session from '../../../spine/collect/02-map/session.txt?raw'
 // spread, & 15 for a 16-bucket table), read from the session, never typed.
 const buckets = [...session.matchAll(/^(SB-\d+): (-?\d+), bucket (\d+)$/gm)].map(([, key, hash, bucket]) => ({ key, hash, bucket }))
 
-export const collectMap: SceneModel = ideFrame({
+export const collectMap: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: files(COLLECT, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'Map<String, Account>', 'accounts.put', 0), highlight: [lineOf(code, 'Map<String, Account>'), lineOf(code, 'accounts.get("SB-0002")'), lineOf(code, 'accounts.put')] },
   session,

@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, linesFrom } from '../ide'
+import { linesFrom } from '../ide'
+import { ideFrame2 } from '../frame'
 import { view } from '../fold'
 import { concurrentTree } from './tree'
 import code from '../../../spine/concurrent/04-atomics/project/labs/Counters.java?raw'
@@ -9,7 +10,8 @@ import session from '../../../spine/concurrent/04-atomics/session.txt?raw'
 // per thread) count exactly. The plain counts are read from the volatile session.
 const plain = [...session.matchAll(/^plain long:\s+(\d+)$/gm)].map(([, n]) => n)
 
-export const concurrentAtomics: SceneModel = ideFrame({
+export const concurrentAtomics: SceneModel = ideFrame2({
+  model: 'TODO',
   tree: concurrentTree('Counters.java', ['Counters.java', 'Tellers.java'], ['Counters.java']),
   editor: { file: 'labs/Counters.java', code, ...view(code, 'void main()', undefined, 0), highlight: linesFrom(code, 'plain++', 'adder.increment()') },
   session,
@@ -34,7 +36,6 @@ export const concurrentAtomics: SceneModel = ideFrame({
         { id: 'adder-use', cells: ['LongAdder', 'many threads add, few read'], tone: 'store' },
       ],
     },
-    { type: 'note', id: 'opened', tone: 'store', text: "Account's static opened counter had the same flaw. It is an AtomicInteger now, so two accounts can never get one number." },
   ],
   edges: [
     { from: 'c-read', to: 'c-swap' },

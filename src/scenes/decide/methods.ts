@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/07-methods/project/Bank.java?raw'
 import session from '../../../spine/decide/07-methods/session.txt?raw'
@@ -8,9 +9,10 @@ import session from '../../../spine/decide/07-methods/session.txt?raw'
 // frame on top of main's, with its own copies of the parameters; `return after` hands back 145.60.
 // No arrow between the frames: routed from a row, it ran through the lower table's title.
 const at = lineOf(code, 'BigDecimal deposit(')
-export const decideMethods: SceneModel = ideFrame({
+export const decideMethods: SceneModel = ideFrame2({
+  model: 'A call pushes a frame; return pops it',
   tree: project('active'),
-  editor: { file: 'Bank.java', code, show: [[7, 16], [at, at + 4]], highlight: [lineOf(code, 'case "deposit"'), at, lineOf(code, 'return after')] },
+  editor: { file: 'Bank.java', code, show: [[lineOf(code, 'case "balance"'), lineOf(code, 'case "withdraw"')], [at, lineOf(code, 'return after')]], highlight: [lineOf(code, 'case "deposit"'), at, lineOf(code, 'return after')] },
   session,
   side: [
     {
@@ -24,7 +26,7 @@ export const decideMethods: SceneModel = ideFrame({
         },
         {
           type: 'table', id: 'main', title: 'main(): waiting for the answer', columns: ['name', 'holds'], rows: [
-            { id: 'balance', cells: ['balance', '120.50, then 145.60: returned'], tone: 'store' },
+            { id: 'balance', cells: ['balance', '120.50 → 145.60'], tone: 'store' },
             ['words', '["deposit", "25.10"]'],
           ],
         },
@@ -32,12 +34,12 @@ export const decideMethods: SceneModel = ideFrame({
     },
     {
       type: 'table', id: 'sigs', title: 'Four methods', tone: 'ingest', columns: ['method', 'gives back'], rows: [
-        ['money(String text)', 'a BigDecimal'],
-        { id: 'dep', cells: ['deposit(balance, amount)', 'the new balance'], tone: 'store' },
-        ['withdraw(balance, amount)', 'the new balance'],
+        ['money(text)', 'a BigDecimal'],
+        { id: 'dep', cells: ['deposit(…)', 'the new balance'], tone: 'store' },
+        ['withdraw(…)', 'the new balance'],
         ['main()', 'nothing: void'],
       ],
     },
-    { type: 'note', id: 'own', tone: 'ingest', text: 'Each call gets its own frame. The balance inside deposit() is a parameter, not main()\'s variable: main() only changes when it assigns what comes back.' },
   ],
+  edges: [{ from: 'top', to: 'main', label: 'return after' }],
 })

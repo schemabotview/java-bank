@@ -1,5 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { ideFrame, lineOf } from '../ide'
+import { lineOf } from '../ide'
+import { ideFrame2 } from '../frame'
 import { project } from '../start/tree'
 import code from '../../../spine/decide/10-throw/project/Bank.java?raw'
 import session from '../../../spine/decide/10-throw/session.txt?raw'
@@ -7,9 +8,10 @@ import session from '../../../spine/decide/10-throw/session.txt?raw'
 // §10 — throw: deposit and withdraw refuse bad requests by THROWING; main decides what a refusal
 // prints. NumberFormatException is a kind of IllegalArgumentException, so it is caught first.
 const dep = lineOf(code, 'BigDecimal deposit(')
-export const decideThrow: SceneModel = ideFrame({
+export const decideThrow: SceneModel = ideFrame2({
+  model: 'throw stops; catch decides',
   tree: project('active'),
-  editor: { file: 'Bank.java', code, show: [[19, 24], [dep, lineOf(code, 'is more than') + 1]], highlight: [lineOf(code, 'catch (IllegalArgument'), lineOf(code, 'must be positive'), lineOf(code, 'is more than')] },
+  editor: { file: 'Bank.java', code, show: [[lineOf(code, 'catch (IllegalArgument'), lineOf(code, 'e.getMessage()')], [lineOf(code, 'amount.signum()'), lineOf(code, 'must be positive')], [lineOf(code, 'amount.compareTo(balance)', dep), lineOf(code, 'is more than')]], highlight: [lineOf(code, 'catch (IllegalArgument'), lineOf(code, 'must be positive'), lineOf(code, 'is more than')] },
   session,
   side: [
     {
@@ -20,14 +22,16 @@ export const decideThrow: SceneModel = ideFrame({
       ],
     },
     {
-      type: 'table', id: 'family', title: 'One family, caught in order', tone: 'ingest', columns: ['exception', 'is a kind of'], rows: [
-        { id: 'nfe', cells: ['NumberFormatException', 'IllegalArgumentException'], tone: 'store' },
-        ['IllegalArgumentException', 'RuntimeException'],
+      type: 'group', id: 'kin', title: 'One family, caught in order', icon: 'layers', tone: 'ingest', children: [
+        { type: 'item', id: 'k-nfe', title: 'NumberFormatException', sub: 'caught first: the narrower', icon: 'bell', tone: 'store' },
+        { type: 'item', id: 'k-iae', title: 'IllegalArgumentException', sub: 'then the wider one', icon: 'bell' },
+        { type: 'item', id: 'k-rte', title: 'RuntimeException', icon: 'bell' },
       ],
     },
-    { type: 'note', id: 'order', tone: 'ingest', text: 'The narrower catch must come first. Swap them, and the compiler refuses: NumberFormatException has already been caught.' },
   ],
   edges: [
+    { from: 'k-nfe', to: 'k-iae', label: 'is a' },
+    { from: 'k-iae', to: 'k-rte', label: 'is a' },
     { from: 'f-check', to: 'f-throw' },
     { from: 'f-throw', to: 'f-catch' },
   ],
