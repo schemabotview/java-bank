@@ -10,23 +10,26 @@ import session from '../../../spine/build/06-modules/session.txt?raw'
 const described = outputOf(session, 'jar --describe-module --file target/ledger-1.0.jar').split('\n').slice(1).map((l) => l.split(' '))
 
 export const buildModules: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A module exports only what it names',
   tree: buildTree({ active: 'module-info.java', fresh: ['module-info.java'], pom: true, output: 'target', module: true }),
   editor: { file: 'src/main/java/module-info.java', code, highlight: [3] },
   session,
   side: [
+    { type: 'table', id: 'desc', title: 'jar --describe-module', tone: 'ingest', columns: ['says', 'about'], rows: described.map(([word, ...rest], i) => ({ id: `m${i}`, cells: [word, rest.join(' ')], tone: word === 'exports' ? 'store' as const : undefined })) },
     {
-      type: 'group', id: 'mod', title: 'module ledger', icon: 'package', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'mod', title: 'module ledger', icon: 'package', tone: 'ingest', children: [
         { type: 'item', id: 'm-model', title: 'ledger.model', sub: 'exported: other modules may use it', icon: 'card', tone: 'store' },
         { type: 'item', id: 'm-inside', title: 'ledger, ledger.store', sub: 'contained: nobody outside sees them', icon: 'lock' },
       ],
     },
-    { type: 'table', id: 'desc', title: 'jar --describe-module', tone: 'ingest', columns: ['says', 'about'], rows: described.map(([word, ...rest], i) => ({ id: `m${i}`, cells: [word, rest.join(' ')], tone: word === 'exports' ? 'store' as const : undefined })) },
     {
       type: 'table', id: 'levels', title: 'Two borders now', tone: 'ingest', columns: ['marked', 'seen by'], rows: [
-        ['public, package not exported', 'this module only'],
-        { id: 'pubexp', cells: ['public, package exported', 'every module'], tone: 'store' },
+        ['public, not exported', 'this module'],
+        { id: 'pubexp', cells: ['public, exported', 'every module'], tone: 'store' },
       ],
     },
+  ],
+  edges: [
+    { from: 'desc', to: 'mod' },
   ],
 })

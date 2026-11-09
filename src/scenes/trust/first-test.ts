@@ -11,7 +11,7 @@ import failing from '../../../spine/trust/01b-failing/session.txt?raw'
 const message = failing.match(/AssertionFailedError: (.*)$/m)?.[1] ?? ''
 
 export const trustFirstTest: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Arrange, act, assert',
   tree: buildTree({ active: 'AccountTest.java', fresh: ['AccountTest.java'], pom: true, output: 'target', tests: ['AccountTest.java'] }),
   editor: { file: 'src/test/java/ledger/model/AccountTest.java', code, highlight: [lineOf(code, '@Test'), lineOf(code, 'var ana'), lineOf(code, 'ana.deposit'), lineOf(code, 'assertEquals(')] },
   session,
@@ -25,12 +25,14 @@ export const trustFirstTest: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'runs', title: 'mvn test', tone: 'ingest', columns: ['the test expects', 'outcome'], rows: [
-        { id: 'pass', cells: ['125.10 EUR', 'Tests run: 1, Failures: 0'], tone: 'store' },
-        { id: 'fail', cells: ['125.00 EUR (a lab)', 'BUILD FAILURE'], tone: 'consume' },
+        { id: 'pass', cells: ['125.10 EUR', 'pass'], tone: 'store' },
+        { id: 'fail', cells: ['125.00 (a lab)', 'BUILD FAILURE'], tone: 'consume' },
       ],
     },
+    { type: 'item', id: 'msg', title: 'JUnit says how it failed', sub: message, icon: 'bell', tone: 'consume' },
   ],
   edges: [
+    { from: 'runs', to: 'msg' },
     { from: 'a-arrange', to: 'a-act' },
     { from: 'a-act', to: 'a-assert' },
   ],

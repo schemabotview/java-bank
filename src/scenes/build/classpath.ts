@@ -10,7 +10,7 @@ import session from '../../../spine/build/02-classpath/session.txt?raw'
 // (ClassNotFoundException); with Money.class deleted after compiling, Account loads but cannot
 // link to Money (NoClassDefFoundError) — the 02 lab.
 export const buildClasspath: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Loaders find classes on the classpath',
   tree: buildTree({ active: 'Bank.java', output: 'out' }),
   editor: { file: 'src/main/java/ledger/Bank.java', code, ...view(code, 'package ledger', 'class Bank {', 0), highlight: [lineOf(code, 'import ledger.model.Money')] },
   session,
@@ -23,10 +23,9 @@ export const buildClasspath: SceneModel = ideFrame2({
       ],
     },
     {
-      type: 'table', id: 'errors', title: 'Two ways to go missing', tone: 'consume', columns: ['', 'ClassNotFoundException', 'NoClassDefFoundError'], rows: [
-        ['when', 'asked for by name', 'needed while running'],
-        ['here', 'java ledger.Bank, no -cp', 'Money.class deleted'],
-        ['means', 'the classpath is wrong', 'it compiled, then vanished'],
+      type: 'table', id: 'errors', title: 'Two ways to go missing', tone: 'consume', columns: ['thrown', 'means'], rows: [
+        ['ClassNotFoundException', 'wrong -cp'],
+        ['NoClassDefFoundError', '.class vanished'],
       ],
     },
   ],

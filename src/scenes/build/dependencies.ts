@@ -14,7 +14,7 @@ const tree = session.split('\n').filter((l) => /:jar:/.test(l)).map((l) => {
 })
 
 export const buildDependencies: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'One line in the pom; Maven fetches the tree',
   tree: buildTree({ active: 'pom.xml', pom: true, output: 'target' }),
   editor: { file: 'pom.xml', code, lang: 'text', ...view(code, '<dependencies>', '</dependencies>', 0), highlight: linesFrom(code, '<dependency>', '</dependency>') },
   session,
@@ -26,16 +26,16 @@ export const buildDependencies: SceneModel = ideFrame2({
     },
     {
       type: 'group', id: 'fetch', title: 'Where they come from', icon: 'globe', tone: 'ingest', dir: 'row', children: [
-        { type: 'item', id: 'f-central', title: 'Maven Central', sub: 'repo.maven.apache.org', icon: 'globe' },
-        { type: 'item', id: 'f-local', title: '~/.m2/repository', sub: 'downloaded once', icon: 'disk', tone: 'store' },
+        { type: 'item', id: 'f-central', title: 'Maven Central', sub: 'the public repository', icon: 'globe' },
+        { type: 'item', id: 'f-local', title: '~/.m2', sub: 'repository: fetched once', icon: 'disk', tone: 'store' },
       ],
     },
     {
-      type: 'table', id: 'scopes', title: 'Scopes', tone: 'ingest', columns: ['scope', 'on the classpath for'], rows: [
-        ['compile (the default)', 'the code, the tests, the jar'],
+      type: 'table', id: 'scopes', title: 'Scopes', tone: 'ingest', columns: ['scope', 'on the classpath of'], rows: [
+        ['compile (default)', 'code, tests, jar'],
         { id: 'test', cells: ['test', 'the tests only'], tone: 'store' },
       ],
     },
   ],
-  edges: [{ from: 'f-central', to: 'f-local' }],
+  edges: [{ from: 'deps', to: 'fetch' }, { from: 'f-central', to: 'f-local' }],
 })

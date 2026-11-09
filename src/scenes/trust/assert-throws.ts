@@ -9,7 +9,7 @@ import session from '../../../spine/trust/02-assert-throws/session.txt?raw'
 // §2 — assertThrows: the overdraft must throw InsufficientFundsException, with the exact message,
 // and leave the balance untouched — three claims, one test.
 export const trustAssertThrows: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'assertThrows: the failure is tested too',
   tree: buildTree({ active: 'AccountTest.java', pom: true, output: 'target', tests: ['AccountTest.java'] }),
   editor: { file: 'src/test/java/ledger/model/AccountTest.java', code, ...view(code, 'void anOverdraft', undefined, 0), highlight: linesFrom(code, 'var refused = assertThrows', 'assertEquals(Money.eur("80.00")') },
   session,
@@ -23,9 +23,9 @@ export const trustAssertThrows: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'claims', title: 'One test, three claims', tone: 'store', columns: ['assert', 'that'], rows: [
-        ['assertThrows', 'the overdraft is refused'],
-        ['assertEquals(message)', 'it names both amounts'],
-        ['assertEquals(balance)', 'nothing was taken: 80.00'],
+        ['assertThrows', 'it is refused'],
+        ['assertEquals(msg)', 'both amounts named'],
+        ['assertEquals(bal.)', 'still 80.00'],
       ],
     },
   ],

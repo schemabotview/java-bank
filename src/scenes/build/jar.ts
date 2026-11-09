@@ -12,13 +12,13 @@ import session from '../../../spine/build/05-jar/session.txt?raw'
 const manifest = outputOf(session, 'unzip -p target/ledger-1.0.jar META-INF/MANIFEST.MF').split('\n').filter(Boolean).map((l) => l.split(': '))
 
 export const buildJar: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A jar: classes plus a manifest',
   tree: buildTree({ active: 'pom.xml', pom: true, output: 'target' }),
   editor: { file: 'pom.xml', code, lang: 'text', ...view(code, '<artifactId>maven-jar-plugin', '</configuration>', 0), highlight: linesFrom(code, '<manifest>', '</manifest>') },
   session,
   side: [
     {
-      type: 'group', id: 'jar', bare: true, dir: 'row', children: [
+      type: 'group', id: 'jar', bare: true, children: [
         {
           type: 'group', id: 'inside', title: 'target/ledger-1.0.jar', icon: 'package', tone: 'store', children: [
             { type: 'item', id: 'j-classes', title: 'ledger/**/*.class', sub: 'the compiled bank', icon: 'boxes' },
