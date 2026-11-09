@@ -156,8 +156,7 @@ const bare = (entries: TreeEntry[], depth = 0): TreeEntry[] =>
     return children ? { ...named, children: bare(children, depth + 1) } : named
   })
 
-/* PORTING */ export function ideFrame2(f: Frame): SceneModel { try { return build(f) } catch (e) { if (f.model === 'TODO') return { nodes: [] }; throw e } }
-function build({ model, tree, editor, session, side, edges = [], project = 'ledger', cwd = project }: Frame): SceneModel {
+export function ideFrame2({ model, tree, editor, session, side, edges = [], project = 'ledger', cwd = project }: Frame): SceneModel {
   const term = terminal(session)
   const rows = term.split('\n').length
   if (rows > ROWS - MIN_EDITOR) throw new Error(`frame.ts "${model}": the transcript is ${rows} rows, a terminal shows at most ${ROWS - MIN_EDITOR}`)

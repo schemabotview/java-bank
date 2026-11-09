@@ -11,7 +11,7 @@ const modules = outputOf(session, 'runtime/bin/java --list-modules').split('\n')
 const sizes = outputOf(session, 'du -sh runtime /usr/lib/jvm/java-25-openjdk-amd64').split('\n').map((l) => l.split(/\s+/))
 
 export const shipJlink: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'jlink: a runtime with only what is needed',
   tree: shipTree('module-info.java', [], ['Client.java', 'Counters.java', 'Interest.java', 'Maps.java', 'Payments.java', 'Tellers.java', 'Transfers.java'], true),
   editor: { file: 'src/main/java/module-info.java', code, highlight: [3] },
   session,
@@ -23,7 +23,7 @@ export const shipJlink: SceneModel = ideFrame2({
       ],
     },
     { type: 'table', id: 'mods', title: 'runtime/bin/java --list-modules', tone: 'store', columns: ['module'], rows: modules.map((m, i) => ({ id: `m${i}`, cells: [m] })) },
-    { type: 'table', id: 'sizes', title: 'du -sh', tone: 'ingest', columns: ['folder', 'size'], rows: sizes.map(([size, path], i) => ({ id: `s${i}`, cells: [path.replace('/usr/lib/jvm/', ''), size], tone: i === 0 ? 'store' as const : undefined })) },
+    { type: 'table', id: 'sizes', title: 'du -sh', tone: 'ingest', columns: ['folder', 'size'], rows: sizes.map(([size, path], i) => ({ id: `s${i}`, cells: [path.replace('/usr/lib/jvm/', '').replace('java-25-openjdk-amd64', 'the full JDK'), size], tone: i === 0 ? 'store' as const : undefined })) },
   ],
-  edges: [{ from: 'l-graph', to: 'l-out' }],
+  edges: [{ from: 'l-graph', to: 'l-out' }, { from: 'link', to: 'mods' }],
 })

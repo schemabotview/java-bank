@@ -12,8 +12,8 @@ code. A **section** is `(scene, narration)`: one full-screen 16:9 frame, one cha
 diagram, and the packaging (one video, 12 courses, 83 sections). Author from it; change it first,
 never drift from it.
 
-Engine `@graphlearning/graphl-flow` (^0.4.0), shell `@graphlearning/shell` (^1.0.3), both published
-and pinned; no overrides. Sister repo: **python-expense-tracker**, the same course design in Python.
+Engine `@graphlearning/graphl-flow` 0.11.0, shell `@graphlearning/shell` 1.1.0, both published and
+pinned exactly (IDE frame v2, COURSE-PLAN Decision 7); no overrides. Sister repo: **python-expense-tracker**, the same course design in Python.
 Its infra is ported here; port, do not reinvent.
 
 ## Status
@@ -41,8 +41,11 @@ description and the cover are in `output/`. Awaiting the owner's review of the w
 | 11 | `concurrent` | 9 | authored, narrated, recorded 4K |
 | 12 | `ship` | 5 | authored, narrated, recorded 4K |
 
-IDE side panes `spread` their blocks down the column (`ide.ts`): a few compact diagrams stacked at
-the top left the lower half empty, and `check` fails a pane under 2/3 filled.
+**2026-11-09: ported to IDE frame v2** (COURSE-PLAN Decision 7). All 78 IDE sections are on v2; the
+5 concept scenes are unchanged. Seven narrations changed (decide throw, model sealed and checked,
+collect generics, stream grouping, save time-zones, trust first-test): their wavs are removed and the
+manifest regenerated, so check-content fails on those seven until Colab regenerates them. Then every
+course is re-recorded: the recordings and the film above are v1. Nothing was replayed.
 
 `scripts/look.sh <dir> <slug or scene>…` shoots at 4K and writes 1920×1080 copies for looking at.
 
@@ -89,9 +92,18 @@ What the replay does that python-expense-tracker's did not:
 
 ## Frames
 
-python-expense-tracker's IDE template unchanged: explorer | editor (80 × 23) over terminal (13 lines)
-| fixed side pane. `ide.ts` differs only in the language (`java`) and the terminal's error rules: a
-javac error, a launcher `error:`, `Exception in thread`, a jshell `|  Exception`/`|  Error:` or a
+**IDE frame v2** (`src/scenes/frame.ts` `ideFrame2`, ported from python-expense-tracker via
+spark-ecommerce-analytics): one 1344 × 756 grid, one fit. Compact explorer 175 (no notes; a name too
+long for its level is cut in the middle) | editor over a 72-column terminal sharing 26 rows (the
+terminal takes its transcript's rows, the editor the rest) | side pane 434, TITLED with the section's
+mental model (`model`), holding ONE diagram (edges or a plot) and at most one table outside it; no
+bullets, no notes (check-content), filled ≥ 1/2 (check-render). A table the narration walks is joined
+to the diagram by an edge; a compiler refusal that was a note is a card in the diagram. A row group
+of three items rarely fits 434px: stack it. A table fits ~36 monospace characters a row. The editor
+counts rows as `pre-wrap` wraps (at spaces, and after an indent alone: 7.2's sort call); a
+hand-picked `show` is used only when the highlighted span does not fit and THROWS, naming the scene,
+when it does not either. `fold.ts` `view()` is v1's. `ide.ts` keeps `lineOf`, `trim` and the
+terminal's error rules, which `frame.ts` imports: a javac error, a launcher `error:`, `Exception in thread`, a jshell `|  Exception`/`|  Error:` or a
 Maven `[ERROR]` runs red to the next prompt (Java prints nothing after one), and tabs expand to 8
 columns, as a stack trace's `\tat` does in a terminal. **Every IDE side pane carries a diagram**, not
 a bullet list. No edges between panes. A detour (◆) is a side-pane diagram when it pictures the code

@@ -9,7 +9,7 @@ import session from '../../../spine/concurrent/03-synchronized/session.txt?raw'
 // §3 — synchronized ◆ side pane: happens-before. One thread at a time holds an account's monitor,
 // and what it wrote is seen by the next holder: the same lab now ends at exactly 1000.00, twice.
 export const concurrentSynchronized: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'One lock per account: one teller at a time',
   // model/ stays closed: open, its longest name overflows the explorer (the tab names the file).
   tree: concurrentTree('Account.java', ['Tellers.java'], [], false, true),
   editor: { file: 'src/main/java/ledger/model/Account.java', code, ...view(code, '// Every method that touches', 'public synchronized void apply', 0), highlight: [lineOf(code, 'public synchronized Money balance()'), lineOf(code, 'public synchronized void deposit'), lineOf(code, 'public synchronized void withdraw')] },

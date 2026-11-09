@@ -9,7 +9,7 @@ import session from '../../../spine/ship/01-http-api/session.txt?raw'
 // §1 — an HTTP API on the JDK's own server (module jdk.httpserver), one virtual thread per request.
 // Every response is the session's curl output.
 export const shipHttpApi: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A request finds its handler; JSON comes back',
   tree: shipTree('Server.java', ['Server.java', 'serve']),
   editor: { file: 'src/main/java/ledger/Server.java', code, ...view(code, 'void main()', 'static String json', 0), highlight: linesFrom(code, 'HttpServer http = HttpServer.create', 'http.start()') },
   session,
@@ -24,8 +24,8 @@ export const shipHttpApi: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'routes', title: 'The API', tone: 'ingest', columns: ['request', 'reply'], rows: [
-        ['GET /accounts/{number}', 'the account, or 404'],
-        { id: 'post', cells: ['POST /transfers', 'paid, or 409 declined'], tone: 'store' },
+        ['GET /accounts/{n}', 'account, or 404'],
+        { id: 'post', cells: ['POST /transfers', 'paid, or 409'], tone: 'store' },
       ],
     },
   ],

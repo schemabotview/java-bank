@@ -10,22 +10,25 @@ import session from '../../../spine/concurrent/02-race/session.txt?raw'
 const balances = [...session.matchAll(/^balance\s+(.*)$/gm)].map(([, b]) => b)
 
 export const concurrentRace: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Read, add, write: a race loses a cent',
   tree: concurrentTree('Tellers.java', ['Tellers.java']),
   editor: { file: 'labs/Tellers.java', code, highlight: linesFrom(code, 'for (int n = 0', 'ana.deposit') },
   session,
   side: [
     {
-      type: 'table', id: 'steps', title: 'balance = balance.plus(amount), in two threads', tone: 'consume', columns: ['', 'teller A', 'teller B', 'balance'], rows: [
+      type: 'table', id: 'steps', title: 'balance.plus(amount), two threads', tone: 'consume', columns: ['', 'teller A', 'teller B', 'balance'], rows: [
         ['1', 'reads 5.00', '', '5.00'],
         ['2', '', 'reads 5.00', '5.00'],
         ['3', 'writes 5.01', '', '5.01'],
-        { id: 'lost', cells: ['4', '', 'writes 5.01', '5.01: a cent lost'], tone: 'consume' },
+        { id: 'lost', cells: ['4', '', 'writes 5.01', '5.01'], tone: 'consume' },
       ],
     },
     {
       type: 'table', id: 'runs', title: 'Two runs of the same program', tone: 'consume', columns: ['run', 'expected', 'balance'], rows:
         balances.map((b, i) => ({ id: `r${i}`, cells: [`${i + 1}`, '1000.00 EUR', b], tone: 'consume' as const })),
     },
+  ],
+  edges: [
+    { from: 'steps', to: 'runs', label: 'a cent lost, many times' },
   ],
 })

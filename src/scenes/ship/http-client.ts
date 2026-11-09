@@ -11,34 +11,35 @@ import session from '../../../spine/ship/03-http-client/session.txt?raw'
 const balances = [...session.matchAll(/"balance": "([^"]+)"/g)].map(([, b]) => b)
 
 export const shipHttpClient: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A retry with the same key pays once',
   tree: shipTree('Client.java', ['Client.java'], ['Client.java', 'Counters.java', 'Interest.java', 'Maps.java', 'Payments.java', 'Tellers.java', 'Transfers.java']),
   editor: { file: 'labs/Client.java', code, ...view(code, 'void main()', 'String get('), highlight: [lineOf(code, 'pool.submit('), lineOf(code, 'pool.submit(', lineOf(code, 'pool.submit(') + 1)] },
   session,
   side: [
     {
-      type: 'group', id: 'call', title: 'One call', icon: 'globe', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'call', title: 'One call', icon: 'globe', tone: 'ingest', children: [
         { type: 'item', id: 'c-req', title: 'HttpRequest', sub: 'URI, header, body', icon: 'file' },
         { type: 'item', id: 'c-send', title: 'client.send(…)', sub: 'waits: fine on a virtual thread', icon: 'zap' },
         { type: 'item', id: 'c-resp', title: 'HttpResponse', sub: 'status and body', icon: 'check', tone: 'store' },
       ],
     },
     {
-      type: 'table', id: 'result', title: '200 requests at once: 100 keys, each sent twice', tone: 'store', columns: ['', "Ana's balance"], rows: [
+      type: 'table', id: 'result', title: '200 requests: 100 keys, twice each', tone: 'store', columns: ['', "Ana's balance"], rows: [
         ['before', balances[0] ?? ''],
         { id: 'after', cells: ['after', balances[1] ?? ''], tone: 'store' },
-        ['paid', '100 × 0.01 = 1.00, once each'],
+        ['paid', '1.00: once each'],
       ],
     },
     {
-      type: 'table', id: 'keys', title: 'Two sends, one key', tone: 'ingest', columns: ['key', 'first send', 'second send'], rows: [
-        ['pay-0', 'pays 0.01', 'the stored reply'],
+      type: 'table', id: 'keys', title: 'Two sends, one key', tone: 'ingest', columns: ['key', '1st send', '2nd send'], rows: [
+        ['pay-0', 'pays 0.01', 'stored reply'],
         ['…', '…', '…'],
-        ['pay-99', 'pays 0.01', 'the stored reply'],
+        ['pay-99', 'pays 0.01', 'stored reply'],
       ],
     },
   ],
   edges: [
+    { from: 'call', to: 'result' },
     { from: 'c-req', to: 'c-send' },
     { from: 'c-send', to: 'c-resp' },
   ],

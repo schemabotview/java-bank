@@ -11,13 +11,13 @@ import session from '../../../spine/concurrent/04-atomics/session.txt?raw'
 const plain = [...session.matchAll(/^plain long:\s+(\d+)$/gm)].map(([, n]) => n)
 
 export const concurrentAtomics: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Compare-and-swap: never a lost update',
   tree: concurrentTree('Counters.java', ['Counters.java', 'Tellers.java'], ['Counters.java']),
   editor: { file: 'labs/Counters.java', code, ...view(code, 'void main()', undefined, 0), highlight: linesFrom(code, 'plain++', 'adder.increment()') },
   session,
   side: [
     {
-      type: 'group', id: 'cas', title: 'incrementAndGet(): compare-and-swap', icon: 'zap', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'cas', title: 'incrementAndGet(): compare-and-swap', icon: 'zap', tone: 'ingest', children: [
         { type: 'item', id: 'c-read', title: 'read 41', icon: 'file' },
         { type: 'item', id: 'c-swap', title: 'set 42 if still 41', sub: 'one CPU instruction', icon: 'cpu', tone: 'store' },
         { type: 'item', id: 'c-retry', title: 'changed? try again', icon: 'workflow' },
@@ -32,12 +32,13 @@ export const concurrentAtomics: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'pick', title: 'Which to use', tone: 'ingest', columns: ['counter', 'best when'], rows: [
-        ['AtomicLong', 'you need the value often'],
-        { id: 'adder-use', cells: ['LongAdder', 'many threads add, few read'], tone: 'store' },
+        ['AtomicLong', 'read often'],
+        { id: 'adder-use', cells: ['LongAdder', 'many add, few read'], tone: 'store' },
       ],
     },
   ],
   edges: [
+    { from: 'cas', to: 'counts' },
     { from: 'c-read', to: 'c-swap' },
     { from: 'c-swap', to: 'c-retry' },
   ],

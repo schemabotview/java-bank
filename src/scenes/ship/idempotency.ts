@@ -10,7 +10,7 @@ import session from '../../../spine/ship/02-idempotency/session.txt?raw'
 const after = [...session.matchAll(/"SB-0001": "([^"]+)"/g)].map(([, b]) => b)
 
 export const shipIdempotency: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'An idempotency key: the same reply, once paid',
   tree: shipTree('Server.java'),
   editor: { file: 'src/main/java/ledger/Server.java', code, show: [[lineOf(code, '// Idempotency-Key'), lineOf(code, 'final Map<String, Reply> done')], [lineOf(code, 'void transfer('), lineOf(code, 'send(ex, reply)') + 1]], highlight: linesFrom(code, 'String key = ex.getRequestHeaders()', 'done.computeIfAbsent') },
   session,
@@ -18,9 +18,9 @@ export const shipIdempotency: SceneModel = ideFrame2({
     {
       type: 'table', id: 'sent', title: 'One transfer of 25.00, sent four times', tone: 'ingest', columns: ['sent', 'Ana after', ''], rows: [
         ['no key', after[0] ?? '', 'paid'],
-        { id: 'twice', cells: ['no key, a retry', after[1] ?? '', 'PAID AGAIN'], tone: 'consume' },
+        { id: 'twice', cells: ['no key, retry', after[1] ?? '', 'PAID AGAIN'], tone: 'consume' },
         ['key t-7', after[2] ?? '', 'paid'],
-        { id: 'once', cells: ['key t-7, a retry', after[3] ?? '', 'the same reply'], tone: 'store' },
+        { id: 'once', cells: ['t-7, retry', after[3] ?? '', 'same reply'], tone: 'store' },
       ],
     },
     {

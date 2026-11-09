@@ -275,3 +275,12 @@ reads code aloud. A detour ◆ is ≤ 120 s and returns to the bank.
 4. One video, one continuous story: 12 courses, 83 sections, ~2 h 05.
 5. Background is just-in-time (◆ detours), never a front-loaded course.
 6. Repo: `java-bank` (new).
+7. IDE frame v2 (2026-11-09): every IDE section moves to graphl-flow 0.11's shared frame (1344 ×
+   756, one fit; compact explorer | editor over a 72-column terminal | side pane TITLED with the
+   section's mental model), as python-expense-tracker did (its Decision 6). The side pane holds one
+   diagram (edges or a plot) and at most one table outside it, no bullets and no notes; a table the
+   narration walks is joined to the diagram by an edge. The spine is unchanged: the 80-column
+   sessions are wrapped at draw time. Done 2026-11-09: all 78 IDE sections on v2, the 5 concept
+   scenes unchanged. Seven narrations named a removed note or table and were edited, their wavs
+   removed for Colab to regenerate: `decide` throw, `model` sealed and checked, `collect` generics,
+   `stream` grouping, `save` time-zones, `trust` first-test. Every course is re-recorded.

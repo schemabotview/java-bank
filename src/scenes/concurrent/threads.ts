@@ -8,7 +8,7 @@ import session from '../../../spine/concurrent/01-threads/session.txt?raw'
 // §1 — threads: four tellers, each its own thread with its own stack, all sharing one Account on
 // the heap; join() waits for each. The result is printed after every thread has finished.
 export const concurrentThreads: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A stack each; one heap, shared',
   tree: concurrentTree('Tellers.java', ['Tellers.java'], ['Tellers.java']),
   editor: { file: 'labs/Tellers.java', code, highlight: [...linesFrom(code, 'Thread t = new Thread', 't.start()'), ...linesFrom(code, 'for (Thread t : tellers)', 't.join()')] },
   session,
@@ -32,11 +32,11 @@ export const concurrentThreads: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'calls', title: 'A thread\'s life', tone: 'ingest', columns: ['call', 'does'], rows: [
-        ['new Thread(() -> …, "teller-1")', 'describes the work: runs nothing'],
+        ['new Thread(…)', 'runs nothing yet'],
         { id: 'start', cells: ['t.start()', 'runs it, beside main'], tone: 'store' },
-        ['t.join()', 'main waits until it ends'],
+        ['t.join()', 'main waits for it'],
       ],
     },
   ],
-  edges: [{ from: 'stacks', to: 'heap', label: 'all deposit into' }],
+  edges: [{ from: 'stacks', to: 'ana' }],
 })

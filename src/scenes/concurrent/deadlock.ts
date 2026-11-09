@@ -8,7 +8,7 @@ import session from '../../../spine/concurrent/05-deadlock/session.txt?raw'
 // §5 — deadlock: each thread holds its payer's lock and waits for its payee's — held by the other.
 // jstack's own lines (sorted, since it may report the cycle from either thread) are the session's.
 export const concurrentDeadlock: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Two locks, opposite orders: a cycle',
   tree: concurrentTree('TransferService.java', ['Counters.java', 'Tellers.java', 'Transfers.java'], ['TransferService.java', 'Transfers.java'], true),
   editor: { file: 'src/main/java/ledger/TransferService.java', code, highlight: linesFrom(code, 'synchronized (from)', 'synchronized (to)') },
   session,

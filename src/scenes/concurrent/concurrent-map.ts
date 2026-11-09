@@ -10,7 +10,7 @@ import session from '../../../spine/concurrent/08-concurrent-map/session.txt?raw
 const lost = [...session.matchAll(/^HashMap:\s+(\d+) accounts$/gm)].map(([, n]) => n)
 
 export const concurrentMap: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A concurrent map locks a bucket, not the map',
   tree: concurrentTree('Maps.java', ['Counters.java', 'Interest.java', 'Maps.java', 'Tellers.java', 'Transfers.java'], ['Maps.java'], true),
   editor: { file: 'labs/Maps.java', code, highlight: linesFrom(code, 'Map<String, Integer> plain', 'Map<String, Integer> concurrent') },
   session,
@@ -27,5 +27,8 @@ export const concurrentMap: SceneModel = ideFrame2({
         { type: 'item', id: 'h-full', title: 'a full bucket', sub: 'locked alone, not the map', icon: 'lock' },
       ],
     },
+  ],
+  edges: [
+    { from: 'sizes', to: 'how' },
   ],
 })
