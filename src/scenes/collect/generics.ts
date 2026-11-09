@@ -13,7 +13,7 @@ import wrong from '../../../spine/collect/05b-wrong-type/session.txt?raw'
 const refusal = outputOf(wrong, 'java Bank.java').split('\n')[0].replace(/^Bank\.java:\d+: error: /, '').replace(/: inference.*/, '')
 
 export const collectGenerics: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'One class, any element type',
   tree: files(WITH_PAGE, 'Page.java', ['Page.java']),
   editor: { file: 'Page.java', code, highlight: [lineOf(code, 'record Page<T>'), lineOf(code, 'static <T> Page<T> of')] },
   session,
@@ -30,11 +30,12 @@ export const collectGenerics: SceneModel = ideFrame2({
       ],
     },
     {
-      type: 'table', id: 'checks', title: 'What T buys', tone: 'ingest', columns: ['', 'without generics', 'Page<T>'], rows: [
-        ['items() gives', 'Objects: cast them', 'Entries, typed'],
-        { id: 'wrong', cells: ['a wrong list', 'a crash, later', 'a compile error'], tone: 'store' },
+      type: 'table', id: 'checks', title: 'What T buys', tone: 'ingest', columns: ['', 'no generics', 'Page<T>'], rows: [
+        ['items()', 'Objects', 'Entries'],
+        { id: 'wrong', cells: ['wrong list', 'a crash, later', 'no compile'], tone: 'store' },
       ],
     },
+    { type: 'item', id: 'refused', title: 'Page<Account> list = Page.of(ledger, …)', sub: `refused: ${refusal}`, icon: 'bell', tone: 'consume' },
   ],
   edges: [{ from: 'tmpl', to: 'uses' }],
 })

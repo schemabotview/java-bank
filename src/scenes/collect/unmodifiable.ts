@@ -1,7 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
 import { lineOf } from '../ide'
 import { ideFrame2 } from '../frame'
-import { view } from '../fold'
 import { files } from '../model/tree'
 import { WITH_PAGE } from './files'
 import code from '../../../spine/collect/08-unmodifiable/project/Bank.java?raw'
@@ -10,9 +9,9 @@ import session from '../../../spine/collect/08-unmodifiable/session.txt?raw'
 // §8 — unmodifiable collections: statement() returns List.copyOf(...) — it survives the ledger being
 // cleared, and add() throws UnsupportedOperationException (the session).
 export const collectUnmodifiable: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A copy nobody can change',
   tree: files(WITH_PAGE, 'Bank.java'),
-  editor: { file: 'Bank.java', code, ...view(code, 'List<Entry> mine', 'List.copyOf', 0), highlight: [lineOf(code, 'ledger.clear()'), lineOf(code, 'mine.add('), lineOf(code, 'List.copyOf')] },
+  editor: { file: 'Bank.java', code, show: [[lineOf(code, 'IO.println("Ana\'s statement'), lineOf(code, 'new Transaction.Deposit(Money.eur("1000000')], [lineOf(code, 'List<Entry> statement('), lineOf(code, 'return List.copyOf')]], highlight: [lineOf(code, 'ledger.clear()'), lineOf(code, 'mine.add('), lineOf(code, 'List.copyOf')] },
   session,
   side: [
     {
@@ -24,8 +23,8 @@ export const collectUnmodifiable: SceneModel = ideFrame2({
     {
       type: 'table', id: 'kinds', title: 'Lists you cannot change', tone: 'ingest', columns: ['made by', 'is', 'add()'], rows: [
         ['List.of(a, b)', 'fixed', 'throws'],
-        { id: 'copyof', cells: ['List.copyOf(list)', 'a fixed copy', 'throws'], tone: 'store' },
-        ['unmodifiableList(list)', 'a read-only view', 'throws'],
+        { id: 'copyof', cells: ['List.copyOf(…)', 'a copy', 'throws'], tone: 'store' },
+        ['unmodifiableList', 'a view', 'throws'],
       ],
     },
   ],
