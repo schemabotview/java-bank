@@ -10,7 +10,7 @@ import session from '../../../spine/stream/03-fold/session.txt?raw'
 // §3 — filter / map / reduce: an account's balance, folded from the ledger, equals the balance the
 // Account kept (the session) — the balance is DERIVED from the ledger.
 export const streamFold: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A balance is a fold of the ledger',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'for (Account a : List.of', 'Money signed', 0), highlight: linesFrom(code, 'Money folded = ledger.stream()', '.reduce(') },
   session,
@@ -24,7 +24,7 @@ export const streamFold: SceneModel = ideFrame2({
       ],
     },
     {
-      type: 'table', id: 'check', title: 'Kept, and folded', tone: 'store', columns: ['account', 'Account kept', 'ledger folded'], rows: [
+      type: 'table', id: 'check', title: 'Kept, and folded', tone: 'store', columns: ['account', 'kept', 'folded'], rows: [
         ['SB-0001', '2120.00', '2120.00'],
         ['SB-0002', '244.20', '244.20'],
       ],

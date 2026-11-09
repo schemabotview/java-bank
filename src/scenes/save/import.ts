@@ -12,18 +12,18 @@ import session from '../../../spine/save/04-import/session.txt?raw'
 const reasons = new Map([...session.matchAll(/^ {2}row (\d+): (.*)$/gm)].map(([, n, why]) => [Number(n), why]))
 const rows = csv.trim().split('\n').slice(1).map((row, i) => {
   const why = reasons.get(i + 2)
-  return { id: `r${i + 2}`, cells: [row.split(',')[0], row.split(',').slice(3).join(','), why ?? 'accepted'], tone: why ? 'consume' as const : 'store' as const }
+  return { id: `r${i + 2}`, cells: [row.split(',')[0], why ?? 'accepted'], tone: why ? 'consume' as const : 'store' as const }
 })
 
 export const saveImport: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Check every row; report, do not stop',
   tree: saveTree('StatementImport.java', ['StatementImport.java', 'statement-2026-10.csv'], true),
   editor: { file: 'StatementImport.java', code, ...view(code, 'private static Entry parse', 'LocalDate.parse', 0), highlight: linesFrom(code, 'if (f.length != 5)', 'not positive') },
   session,
   side: [
-    { type: 'table', id: 'rows', title: 'statement-2026-10.csv, row by row', tone: 'ingest', columns: ['id', 'kind, amount', 'verdict'], rows },
+    { type: 'table', id: 'rows', title: 'statement-2026-10.csv, row by row', tone: 'ingest', columns: ['id', 'verdict'], rows },
     {
-      type: 'group', id: 'checks', title: 'Each row, in order', icon: 'filter', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'checks', title: 'Each row, in order', icon: 'filter', tone: 'ingest', children: [
         { type: 'item', id: 'c-shape', title: '5 fields', icon: 'table' },
         { type: 'item', id: 'c-id', title: 'a new id', icon: 'key' },
         { type: 'item', id: 'c-acct', title: 'a known account', icon: 'users' },

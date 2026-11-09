@@ -12,30 +12,31 @@ import session from '../../../spine/save/01-files/session.txt?raw'
 const lines = outputOf(session, 'cat data/journal.csv').split('\n')
 
 export const saveFiles: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Every post appends a line on disk',
   tree: saveTree('Journal.java', ['Journal.java', 'journal.csv']),
   editor: { file: 'Journal.java', code, ...view(code, '// The bank', 'List<Entry> readAll', 0), highlight: linesFrom(code, 'void append', 'StandardOpenOption.CREATE') },
   session,
   side: [
     {
-      type: 'group', id: 'flow', title: 'post(…), now', icon: 'workflow', tone: 'ingest', dir: 'row', children: [
+      type: 'group', id: 'flow', title: 'post(…), now', icon: 'workflow', tone: 'ingest', children: [
         { type: 'item', id: 'f-apply', title: 'a.apply(t)', sub: 'the account', icon: 'card' },
         { type: 'item', id: 'f-ledger', title: 'ledger.add(e)', sub: 'in memory', icon: 'layers' },
         { type: 'item', id: 'f-journal', title: 'journal.append(e)', sub: 'on disk', icon: 'disk', tone: 'store' },
       ],
     },
     {
-      type: 'table', id: 'csv', title: 'data/journal.csv: day, account, kind, amount', tone: 'store', rows: lines.map((l) => l.split(',')),
+      type: 'table', id: 'csv', title: 'data/journal.csv', tone: 'store', rows: lines.map((l) => l.split(',')),
     },
     {
       type: 'table', id: 'api', title: 'java.nio.file', tone: 'ingest', columns: ['call', 'does'], rows: [
-        ['Path.of("data", "journal.csv")', 'names a file: nothing opened'],
-        ['Files.createDirectories(dir)', 'makes data/ if missing'],
-        ['Files.writeString(…, APPEND)', 'opens, adds a line, closes'],
+        ['Path.of(…)', 'names a file'],
+        ['createDirectories', 'makes data/'],
+        ['writeString(…, APPEND)', 'open, add, close'],
       ],
     },
   ],
   edges: [
+    { from: 'flow', to: 'csv' },
     { from: 'f-apply', to: 'f-ledger' },
     { from: 'f-ledger', to: 'f-journal' },
   ],

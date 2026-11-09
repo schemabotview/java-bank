@@ -10,11 +10,12 @@ import session from '../../../spine/stream/06-loop-or-stream/session.txt?raw'
 // §6 — when a loop reads better: a running balance carries state from line to line, so it is a
 // loop; a total over the whole ledger is a question about the list, so it is a stream.
 export const streamLoopOrStream: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'A loop when each line needs the last',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, '// A running balance', 'Money signed', 0), highlight: linesFrom(code, 'Money running', 'running = running.plus') },
   session,
   side: [
+    { type: 'item', id: 'entries', title: "Ana's entries, in day order", sub: 'each line needs the one before', icon: 'layers', tone: 'source' },
     {
       type: 'table', id: 'running', title: "Ana's running balance: a loop", tone: 'ingest', columns: ['day', 'change', 'running'], rows: [
         ['2026-09-01', '+1200.00', '1200.00'],
@@ -24,12 +25,15 @@ export const streamLoopOrStream: SceneModel = ideFrame2({
       ],
     },
     {
-      type: 'table', id: 'choose', title: 'Which reads better', tone: 'ingest', columns: ['the job', 'write it as'], rows: [
-        ['each line needs the one before', 'a loop'],
-        ['side effects: print, post, save', 'a loop'],
-        { id: 'whole', cells: ['a question about the whole list', 'a stream'], tone: 'store' },
-        ['filter, then transform, then total', 'a stream'],
+      type: 'table', id: 'choose', title: 'Which reads better', tone: 'ingest', columns: ['the job', 'write'], rows: [
+        ['needs the line before', 'a loop'],
+        ['print, post, save', 'a loop'],
+        { id: 'whole', cells: ['a question on the list', 'a stream'], tone: 'store' },
+        ['filter, map, total', 'a stream'],
       ],
     },
+  ],
+  edges: [
+    { from: 'entries', to: 'running' },
   ],
 })

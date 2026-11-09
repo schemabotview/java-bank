@@ -1,7 +1,6 @@
 import type { SceneModel } from '@graphlearning/graphl-flow'
-import { linesFrom } from '../ide'
+import { lineOf, linesFrom } from '../ide'
 import { ideFrame2 } from '../frame'
-import { view } from '../fold'
 import { saveTree } from './tree'
 import code from '../../../spine/save/02-replay/project/Bank.java?raw'
 import session from '../../../spine/save/02-replay/session.txt?raw'
@@ -9,9 +8,9 @@ import session from '../../../spine/save/02-replay/session.txt?raw'
 // §2 — replay: on start, every journal line is applied again (and not re-written); three runs, the
 // same balances, still 3 lines (the session).
 export const saveReplay: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Replay the journal; rebuild the balances',
   tree: saveTree('Bank.java'),
-  editor: { file: 'Bank.java', code, ...view(code, 'List<Entry> saved', 'Account open', 0), highlight: [...linesFrom(code, 'List<Entry> saved', 'replay(e);'), ...linesFrom(code, 'void replay', 'ledger.add(e);')] },
+  editor: { file: 'Bank.java', code, show: [[lineOf(code, 'List<Entry> saved'), lineOf(code, 'if (saved.isEmpty())')], [lineOf(code, 'void replay'), lineOf(code, 'ledger.add(e);')]], highlight: [...linesFrom(code, 'List<Entry> saved', 'replay(e);'), ...linesFrom(code, 'void replay', 'ledger.add(e);')] },
   session,
   side: [
     {
@@ -23,9 +22,9 @@ export const saveReplay: SceneModel = ideFrame2({
     },
     {
       type: 'table', id: 'runs', title: 'Three runs', tone: 'ingest', columns: ['run', 'did', 'journal'], rows: [
-        ['1', 'posted the opening day', '3 lines'],
-        { id: 'r2', cells: ['2', 'replayed 3 entries', '3 lines'], tone: 'store' },
-        { id: 'r3', cells: ['3', 'replayed 3 entries', '3 lines'], tone: 'store' },
+        ['1', 'posted day 1', '3 lines'],
+        { id: 'r2', cells: ['2', 'replayed 3', '3 lines'], tone: 'store' },
+        { id: 'r3', cells: ['3', 'replayed 3', '3 lines'], tone: 'store' },
       ],
     },
   ],

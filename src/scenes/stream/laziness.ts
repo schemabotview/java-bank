@@ -10,18 +10,18 @@ import session from '../../../spine/stream/05-laziness/session.txt?raw'
 // §5 — laziness: building the stream runs nothing; anyMatch pulls entries one at a time and stops
 // at the first match, the 5th — the last two are never looked at (the session's peek lines).
 export const streamLaziness: SceneModel = ideFrame2({
-  model: 'TODO',
+  model: 'Nothing runs until a terminal step pulls',
   tree: files(WITH_PAGE, 'Bank.java'),
   editor: { file: 'Bank.java', code, ...view(code, 'Predicate<Entry> large', 'Account open', 0), highlight: linesFrom(code, 'Stream<Entry> checked', 'checked.anyMatch') },
   session,
   side: [
     {
       type: 'table', id: 'pulled', title: 'checked.anyMatch(large)', tone: 'ingest', columns: ['entry', 'looked at?'], rows: [
-        ['1  Deposit 1200.00', 'yes: no match'],
-        ['2  Deposit 300.00', 'yes: no match'],
-        ['3  Withdrawal 80.00', 'yes: no match'],
-        ['4  Deposit 2500.00', 'yes: no match'],
-        { id: 'hit', cells: ['5  Withdrawal 1500.00', 'yes: a match, stop'], tone: 'store' },
+        ['1  Deposit 1200.00', 'no match'],
+        ['2  Deposit 300.00', 'no match'],
+        ['3  Withdrawal 80.00', 'no match'],
+        ['4  Deposit 2500.00', 'no match'],
+        { id: 'hit', cells: ['5  Withdrawal 1500.00', 'match: stop'], tone: 'store' },
         { id: 'skip6', cells: ['6  Withdrawal 120.00', 'never'], tone: 'consume' },
         { id: 'skip7', cells: ['7  Deposit 64.20', 'never'], tone: 'consume' },
       ],
@@ -33,5 +33,5 @@ export const streamLaziness: SceneModel = ideFrame2({
       ],
     },
   ],
-  edges: [{ from: 't-mid', to: 't-end', label: 'waits for' }],
+  edges: [{ from: 'pulled', to: 'two' }, { from: 't-mid', to: 't-end', label: 'waits for' }],
 })
