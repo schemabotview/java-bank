@@ -44,8 +44,9 @@ description and the cover are in `output/`. Awaiting the owner's review of the w
 **2026-11-09: ported to IDE frame v2** (COURSE-PLAN Decision 7). All 78 IDE sections are on v2; the
 5 concept scenes are unchanged. Seven narrations changed (decide throw, model sealed and checked,
 collect generics, stream grouping, save time-zones, trust first-test): their wavs are removed and the
-manifest regenerated, so check-content fails on those seven until Colab regenerates them. Then every
-course is re-recorded: the recordings and the film above are v1. Nothing was replayed.
+manifest regenerated; Colab regenerated them. Nothing was replayed. 2026-11-12: every course re-recorded at 4K on v2 (segment cache and `scripts/out/` cleared first:
+the cache's fingerprint covers audio and encoding, not the scene, so a frame change needs
+`--force` or an empty cache) and the film re-cut, 2:30:48.
 
 `scripts/look.sh <dir> <slug or scene>…` shoots at 4K and writes 1920×1080 copies for looking at.
 
